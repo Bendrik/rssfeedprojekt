@@ -14,22 +14,32 @@ namespace testprojekt
 {
     public partial class Form1 : Form
     {
+        CategoryController categoryController;
         public Form1()
         {
             InitializeComponent();
-            getCategories();
+            //getCategories();
         }
 
         public void getCategories()
         {
             catList.Items.Clear();
             //catList.Items.Add("grej");
-            //CategoryController.getAllCategories();
+
+            foreach (var item in categoryController.getAllCategories())
+            {
+                if (item != null)
+                {
+                    catList.Items.Add(item.Name);
+                }
+            }
+            
         }
 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //lägg till ny pod
             //PodController.CreatePod(textBoxUrl.Text, comboBoxFreq.SelectedItem, comboBoxCat.SelectedItem);
         }
 
@@ -42,6 +52,8 @@ namespace testprojekt
         private void btnNewCat_Click(object sender, EventArgs e)
         {
             //lägg ny kategori i xml
+            //behövs validering
+            categoryController.createCategory(txtCategory.Text);
             //getCategories();
         }
 

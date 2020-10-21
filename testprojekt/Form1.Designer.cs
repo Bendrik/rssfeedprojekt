@@ -37,7 +37,7 @@
             this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.comboBoxFreq = new System.Windows.Forms.ComboBox();
             this.comboBoxCat = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCategory = new System.Windows.Forms.TextBox();
             this.btnSaveCat = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
@@ -122,12 +122,12 @@
             this.comboBoxCat.Size = new System.Drawing.Size(121, 24);
             this.comboBoxCat.TabIndex = 7;
             // 
-            // textBox1
+            // txtCategory
             // 
-            this.textBox1.Location = new System.Drawing.Point(491, 194);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(179, 22);
-            this.textBox1.TabIndex = 8;
+            this.txtCategory.Location = new System.Drawing.Point(491, 194);
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Size = new System.Drawing.Size(179, 22);
+            this.txtCategory.TabIndex = 8;
             // 
             // btnSaveCat
             // 
@@ -176,7 +176,7 @@
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSaveCat);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.comboBoxCat);
             this.Controls.Add(this.comboBoxFreq);
             this.Controls.Add(this.textBoxUrl);
@@ -201,7 +201,7 @@
         private System.Windows.Forms.TextBox textBoxUrl;
         private System.Windows.Forms.ComboBox comboBoxFreq;
         private System.Windows.Forms.ComboBox comboBoxCat;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCategory;
         private System.Windows.Forms.Button btnSaveCat;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNew;
