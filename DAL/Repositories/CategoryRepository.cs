@@ -20,7 +20,8 @@ namespace DAL.Repositories
         }
         public void Create(Category entity)
         {
-            throw new NotImplementedException();
+            categoryList.Add(entity);
+            SaveChanges();
         }
 
         public void Delete(int index)
@@ -37,7 +38,7 @@ namespace DAL.Repositories
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            dataManager.Serialize(categoryList);
         }
 
         public void Update(int index, Category newEntity)

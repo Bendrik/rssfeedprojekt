@@ -18,7 +18,13 @@ namespace BL.Controllers
 
         public List<Category> getAllCategories()
         {
-            return CategoryRepository.GetAll();
+            return categoryRepository.GetAll();
+        }
+
+        public void createCategory(string name)
+        {
+            Category newCategory = new Category(name);
+            categoryRepository.Create(newCategory);
         }
     }
 }

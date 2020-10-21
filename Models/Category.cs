@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Category
+    public class Category ///////denna kanske bara kan ärva av media ist och då behövs inte category controller/repository men vet inte hur det blir med xmlen då
     {
         public string Name { get; set; }
 
