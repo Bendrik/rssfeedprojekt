@@ -31,7 +31,7 @@ namespace DAL.Repositories
         public List<Category> GetAll()
         {
             List<Category> categoryListReturn = new List<Category>();
-            categoryListReturn = dataManager.Deserialize();
+            categoryListReturn = DataManager.Deserialize();
             return categoryListReturn;
         }
 
