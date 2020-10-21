@@ -9,13 +9,13 @@ namespace DAL.Repositories
 {
     public class CategoryRepository : ICategoryRepository<Category>
     {
-        DataManager dataManager;
+        DataManagerCategory dataManager;
         List<Category> categoryList;
 
         public CategoryRepository()
         {
             categoryList = new List<Category>();
-            dataManager = new DataManager();
+            dataManager = new DataManagerCategory();
             categoryList = GetAll();
         }
         public void Create(Category entity)
@@ -31,7 +31,7 @@ namespace DAL.Repositories
         public List<Category> GetAll()
         {
             List<Category> categoryListReturn = new List<Category>();
-            categoryListReturn = DataManagerCategory.Deserialize();
+            categoryListReturn = dataManager.Deserialize();
             return categoryListReturn;
         }
 
