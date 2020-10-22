@@ -18,7 +18,8 @@ namespace testprojekt
         public Form1()
         {
             InitializeComponent();
-            //getCategories();
+            categoryController = new CategoryController();
+            getCategories();
         }
 
         public void getCategories()
@@ -30,7 +31,10 @@ namespace testprojekt
             {
                 if (item != null)
                 {
+                    //var listViewItem = new ListViewItem(item.Name);
+                    //catList.Items.Add(listViewItem);
                     catList.Items.Add(item.Name);
+                    
                 }
             }
             
@@ -40,7 +44,7 @@ namespace testprojekt
         private void btnSave_Click(object sender, EventArgs e)
         {
             //lägg till ny pod
-            //PodController.CreatePod(textBoxUrl.Text, comboBoxFreq.SelectedItem, comboBoxCat.SelectedItem);
+            //PodController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem, comboBoxCat.SelectedItem);
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -54,7 +58,7 @@ namespace testprojekt
             //lägg ny kategori i xml
             //behövs validering
             categoryController.createCategory(txtCategory.Text);
-            //getCategories();
+            getCategories();
         }
 
         private void catList_SelectedIndexChanged(object sender, EventArgs e)

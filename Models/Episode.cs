@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Episode
+    public class Episode : Media
     {
+
+        public string Description { get; set; }
+
+        public Episode(string name) : base(name)
+        {
+            string description = Description;
+        }
     }
 }

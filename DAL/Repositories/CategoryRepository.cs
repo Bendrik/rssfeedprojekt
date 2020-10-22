@@ -31,14 +31,24 @@ namespace DAL.Repositories
 
         public List<Category> GetAll()
         {
+
             List<Category> categoryListReturn = new List<Category>();
             categoryListReturn = dataManager.Deserialize();
             return categoryListReturn;
+
         }
 
         public void SaveChanges()
         {
-            dataManager.Serialize(categoryList);
+
+            try
+            {
+                dataManager.Serialize(categoryList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Update(int index, Category newEntity)
