@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.catList = new System.Windows.Forms.ListView();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSave = new System.Windows.Forms.Button();
             this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.comboBoxFreq = new System.Windows.Forms.ComboBox();
@@ -42,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnNewCat = new System.Windows.Forms.Button();
+            this.txtPodName = new System.Windows.Forms.TextBox();
+            this.catList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -50,7 +49,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.91489F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.08511F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -61,21 +60,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(427, 204);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // catList
-            // 
-            this.catList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.catList.HideSelection = false;
-            listViewItem1.Tag = "123";
-            this.catList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.catList.Location = new System.Drawing.Point(491, 43);
-            this.catList.Name = "catList";
-            this.catList.Size = new System.Drawing.Size(288, 136);
-            this.catList.TabIndex = 1;
-            this.catList.UseCompatibleStateImageBehavior = false;
-            this.catList.SelectedIndexChanged += new System.EventHandler(this.catList_SelectedIndexChanged);
-            // 
             // listView2
             // 
             this.listView2.HideSelection = false;
@@ -84,10 +68,6 @@
             this.listView2.Size = new System.Drawing.Size(287, 97);
             this.listView2.TabIndex = 3;
             this.listView2.UseCompatibleStateImageBehavior = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "kolumno";
             // 
             // btnSave
             // 
@@ -167,11 +147,29 @@
             this.btnNewCat.UseVisualStyleBackColor = true;
             this.btnNewCat.Click += new System.EventHandler(this.btnNewCat_Click);
             // 
+            // txtPodName
+            // 
+            this.txtPodName.Location = new System.Drawing.Point(12, 263);
+            this.txtPodName.Name = "txtPodName";
+            this.txtPodName.Size = new System.Drawing.Size(100, 22);
+            this.txtPodName.TabIndex = 13;
+            // 
+            // catList
+            // 
+            this.catList.FormattingEnabled = true;
+            this.catList.ItemHeight = 16;
+            this.catList.Location = new System.Drawing.Point(491, 32);
+            this.catList.Name = "catList";
+            this.catList.Size = new System.Drawing.Size(277, 100);
+            this.catList.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.catList);
+            this.Controls.Add(this.txtPodName);
             this.Controls.Add(this.btnNewCat);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.label1);
@@ -182,7 +180,6 @@
             this.Controls.Add(this.textBoxUrl);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.listView2);
-            this.Controls.Add(this.catList);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -194,8 +191,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ListView catList;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox textBoxUrl;
@@ -206,6 +201,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnNewCat;
+        private System.Windows.Forms.TextBox txtPodName;
+        private System.Windows.Forms.ListBox catList;
     }
 }
 

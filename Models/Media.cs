@@ -8,13 +8,16 @@ namespace Models
 {
     public abstract class Media
     {
-        //public int EpisodeAmount { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         public Media(string name)
         {
-            //EpisodeAmount = episodeAmount;
             Name = name;
+        }
+
+        public Media()
+        {
+
         }
       
     }
