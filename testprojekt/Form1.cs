@@ -25,16 +25,14 @@ namespace testprojekt
         public void getCategories()
         {
             catList.Items.Clear();
-            //catList.Items.Add("grej");
+            comboBoxCat.Items.Clear();
 
             foreach (var item in categoryController.getAllCategories())
             {
                 if (item != null)
                 {
-                    //var listViewItem = new ListViewItem(item.Name);
-                    //catList.Items.Add(listViewItem);
                     catList.Items.Add(item.Name);
-                    
+                    comboBoxCat.Items.Add(item.Name);
                 }
             }
             

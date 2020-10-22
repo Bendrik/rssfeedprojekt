@@ -9,13 +9,15 @@ namespace Models
     public class Pod : Media
     {
         public string Frequency { get; set; }
-        public int EpisodeAmount { get; set; }
         public string Category { get; set; }
+
+        public List<Episode> Episodes { get; set; }
+        
         public Pod (string name) : base (name)
         {
             string frequency = Frequency;
-            int episodeAmount = EpisodeAmount;
             string category = Category;
+
         }
 
     }
