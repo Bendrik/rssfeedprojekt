@@ -67,7 +67,7 @@
             // 
             // textBoxUrl
             // 
-            this.textBoxUrl.Location = new System.Drawing.Point(58, 265);
+            this.textBoxUrl.Location = new System.Drawing.Point(61, 262);
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(150, 22);
             this.textBoxUrl.TabIndex = 5;

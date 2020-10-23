@@ -18,7 +18,7 @@ namespace DAL.Repositories
         {
             podList = new List<Pod>();
             dataManager = new DataManager();
-            //podList = GetAll();
+            podList = GetAll();
         }
         public void Create(Pod entity)
         {
@@ -33,7 +33,9 @@ namespace DAL.Repositories
 
         public List<Pod> GetAll()
         {
-            throw new NotImplementedException();
+            List<Pod> podListReturn = new List<Pod>();
+            podListReturn = dataManager.Deserialize();
+            return podListReturn;
         }
 
         public void SaveChanges()

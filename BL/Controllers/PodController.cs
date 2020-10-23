@@ -20,19 +20,34 @@ namespace BL.Controllers
 
         public void CreatePod(string name, string url, string frequency, string category)
         {
-            Pod newPod = new Pod(name, url, frequency, category);
-            Console.WriteLine(name + " " + url + " " + frequency + " " + category );
+            //List<Episode> = new List<Episode> getEpisodes();
+            List<Episode> episodes = getEpisodes(url);
+            Pod newPod = new Pod(name, url, frequency, category, episodes);
             podRepository.Create(newPod);
         }
 
-        public void test()
+        public List<Pod> getAllPods()
         {
-            XmlReader rssReader = XmlReader.Create("https://www.svt.se/nyheter/rss.xml");
+            return podRepository.GetAll();
+        }
+
+        public List<Episode> getEpisodes(string url)
+        {
+            //XmlReader rssReader = XmlReader.Create("https://www.svt.se/nyheter/rss.xml");
+            XmlReader rssReader = XmlReader.Create(url);
             SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
-            string podcastTitle = rssFeed.Title.Text;
-            string podcastDescription = rssFeed.Description.Text;
-            Console.WriteLine(podcastTitle);
-            Console.WriteLine(podcastDescription);
+
+            List<Episode> episodeList = new List<Episode>();
+
+            foreach (var item in rssFeed.Items)
+            {
+                Episode newEpisode = new Episode();
+                newEpisode.Name = item.Title.Text;
+                newEpisode.Description = item.Summary.Text;
+                episodeList.Add(newEpisode);
+            }
+
+            return episodeList;
         }
     }
 }

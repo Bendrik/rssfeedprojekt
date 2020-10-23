@@ -28,7 +28,7 @@ namespace testprojekt
             getPods();
         }
 
-        public void getCategories()
+        private void getCategories()
         {
             catList.Items.Clear();
             comboBoxCat.Items.Clear();
@@ -45,7 +45,7 @@ namespace testprojekt
 
         }
 
-        public void fillFrequencyBox()
+        private void fillFrequencyBox()
         {
             comboBoxFreq.Items.Clear();
 
@@ -56,9 +56,16 @@ namespace testprojekt
             comboBoxFreq.SelectedIndex = 0;
         }
 
-        public void getPods()
+        private void getPods()
         {
-
+            podBox.Items.Clear();
+            foreach (var item in podController.getAllPods())
+            {
+                if (item != null)
+                {
+                    podBox.Items.Add(item.Name + item.Frequency + item.Category);
+                }
+            }
         }
 
 
@@ -94,8 +101,8 @@ namespace testprojekt
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            //podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
-            podController.test();
+            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            //podController.test();
         }
     }
 }

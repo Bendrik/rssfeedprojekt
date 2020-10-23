@@ -11,7 +11,7 @@ namespace Models
 
         public string Description { get; set; }
 
-        public Episode(string name) : base(name)
+        public Episode()
         {
             string description = Description;
         }
