@@ -13,9 +13,11 @@ namespace DAL.Repositories
         //"https://api.sr.se/api/rss/pod/22209" title="Creepypodden i P3"
 
         DataManager dataManager;
+        List<Pod> podList;
         public void Create(Pod entity) /////kanske inte får ha dessa metoder utan måste skapa egna?
         {
-            throw new NotImplementedException();
+            podList.Add(entity);
+            SaveChanges();
         }
 
         public void Delete(int index)
@@ -30,7 +32,14 @@ namespace DAL.Repositories
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataManager.Serialize(podList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Update(int index, Pod newEntity)

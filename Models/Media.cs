@@ -12,7 +12,7 @@ namespace Models
 
         public Media(string name)
         {
-            Name = name;
+            //Name = name;
         }
 
         public Media()

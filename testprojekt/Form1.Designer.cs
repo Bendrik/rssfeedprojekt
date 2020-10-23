@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listView2 = new System.Windows.Forms.ListView();
             this.btnSave = new System.Windows.Forms.Button();
             this.textBoxUrl = new System.Windows.Forms.TextBox();
@@ -41,24 +40,8 @@
             this.btnNewCat = new System.Windows.Forms.Button();
             this.txtPodName = new System.Windows.Forms.TextBox();
             this.catList = new System.Windows.Forms.ListBox();
+            this.podBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.91489F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.08511F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.37288F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.62712F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(427, 204);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // listView2
             // 
@@ -93,6 +76,7 @@
             this.comboBoxFreq.Name = "comboBoxFreq";
             this.comboBoxFreq.Size = new System.Drawing.Size(121, 24);
             this.comboBoxFreq.TabIndex = 6;
+            this.comboBoxFreq.SelectedIndexChanged += new System.EventHandler(this.comboBoxFreq_SelectedIndexChanged);
             // 
             // comboBoxCat
             // 
@@ -163,11 +147,21 @@
             this.catList.Size = new System.Drawing.Size(277, 100);
             this.catList.TabIndex = 14;
             // 
+            // podBox
+            // 
+            this.podBox.FormattingEnabled = true;
+            this.podBox.ItemHeight = 16;
+            this.podBox.Location = new System.Drawing.Point(12, 13);
+            this.podBox.Name = "podBox";
+            this.podBox.Size = new System.Drawing.Size(427, 196);
+            this.podBox.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.podBox);
             this.Controls.Add(this.catList);
             this.Controls.Add(this.txtPodName);
             this.Controls.Add(this.btnNewCat);
@@ -180,7 +174,6 @@
             this.Controls.Add(this.textBoxUrl);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.listView2);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -189,8 +182,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox textBoxUrl;
@@ -203,6 +194,7 @@
         private System.Windows.Forms.Button btnNewCat;
         private System.Windows.Forms.TextBox txtPodName;
         private System.Windows.Forms.ListBox catList;
+        private System.Windows.Forms.ListBox podBox;
     }
 }
 

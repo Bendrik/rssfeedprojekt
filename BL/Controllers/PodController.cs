@@ -16,8 +16,10 @@ namespace BL.Controllers
             podRepository = new PodRepository();
         }
 
-        public void CreatePod(string url, object frequency, object category)
+        public void CreatePod(string name, string url, string frequency, string category)
         {
+            Pod newPod = new Pod(name, url, frequency, category);
+            podRepository.Create(newPod);
         }
     }
 }

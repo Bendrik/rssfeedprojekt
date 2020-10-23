@@ -15,10 +15,12 @@ namespace testprojekt
     public partial class Form1 : Form
     {
         CategoryController categoryController;
+        PodController podController;
         public Form1()
         {
             InitializeComponent();
             categoryController = new CategoryController();
+            podController = new PodController();
             getCategories();
         }
 
@@ -35,6 +37,7 @@ namespace testprojekt
                     comboBoxCat.Items.Add(item.Name);
                 }
             }
+            comboBoxCat.SelectedIndex = 0;
             
         }
 
@@ -42,7 +45,7 @@ namespace testprojekt
         private void btnSave_Click(object sender, EventArgs e)
         {
             //lägg till ny pod
-            //PodController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem, comboBoxCat.SelectedItem);
+            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -62,6 +65,11 @@ namespace testprojekt
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
         {
             //tror inte denna behövs (action när man trycker på en kategori i listan)
+        }
+
+        private void comboBoxFreq_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
