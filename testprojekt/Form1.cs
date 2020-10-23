@@ -9,20 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
 using BL.Controllers;
+using System.Xml;
+using System.ServiceModel.Syndication;
 
 namespace testprojekt
 {
     public partial class Form1 : Form
     {
         CategoryController categoryController;
+        PodController podController;
         public Form1()
         {
             InitializeComponent();
             categoryController = new CategoryController();
+            podController = new PodController();
             getCategories();
+            fillFrequencyBox();
+            getPods();
         }
 
-        public void getCategories()
+        private void getCategories()
         {
             catList.Items.Clear();
             comboBoxCat.Items.Clear();
@@ -35,14 +41,38 @@ namespace testprojekt
                     comboBoxCat.Items.Add(item.Name);
                 }
             }
-            
+            comboBoxCat.SelectedIndex = 0;
+
+        }
+
+        private void fillFrequencyBox()
+        {
+            comboBoxFreq.Items.Clear();
+
+            comboBoxFreq.Items.Add("Var 5:e minut");
+            comboBoxFreq.Items.Add("Var 10:e minut");
+            comboBoxFreq.Items.Add("Var 20:e minut");
+
+            comboBoxFreq.SelectedIndex = 0;
+        }
+
+        private void getPods()
+        {
+            podBox.Items.Clear();
+            foreach (var item in podController.getAllPods())
+            {
+                if (item != null)
+                {
+                    podBox.Items.Add(item.Name + item.Frequency + item.Category);
+                }
+            }
         }
 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //lägg till ny pod
-            //PodController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem, comboBoxCat.SelectedItem);
+            //uppdatera pod
+            
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -62,6 +92,17 @@ namespace testprojekt
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
         {
             //tror inte denna behövs (action när man trycker på en kategori i listan)
+        }
+
+        private void comboBoxFreq_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            //podController.test();
         }
     }
 }
