@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Models
 {
@@ -17,12 +18,15 @@ namespace Models
         
         public Pod (string name, string podUrl, string frequency, string category) : base (name)
         {
-            name = Name;
-            podUrl = PodUrl;
-            frequency = Frequency;
-            category = Category;
+            Name = name;
+            PodUrl = podUrl;
+            Frequency = frequency;
+            Category = category;
             //List episodes = Episodes;
 
+        }
+        public Pod()
+        { 
         }
 
     }

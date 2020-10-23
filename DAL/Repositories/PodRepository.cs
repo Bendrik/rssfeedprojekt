@@ -14,7 +14,13 @@ namespace DAL.Repositories
 
         DataManager dataManager;
         List<Pod> podList;
-        public void Create(Pod entity) /////kanske inte får ha dessa metoder utan måste skapa egna?
+        public PodRepository()
+        {
+            podList = new List<Pod>();
+            dataManager = new DataManager();
+            //podList = GetAll();
+        }
+        public void Create(Pod entity)
         {
             podList.Add(entity);
             SaveChanges();
@@ -31,15 +37,8 @@ namespace DAL.Repositories
         }
 
         public void SaveChanges()
-        {
-            try
-            {
-                dataManager.Serialize(podList);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        {         
+            dataManager.Serialize(podList);      
         }
 
         public void Update(int index, Pod newEntity)

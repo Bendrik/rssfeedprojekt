@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
 using BL.Controllers;
+using System.Xml;
+using System.ServiceModel.Syndication;
 
 namespace testprojekt
 {
@@ -22,6 +24,8 @@ namespace testprojekt
             categoryController = new CategoryController();
             podController = new PodController();
             getCategories();
+            fillFrequencyBox();
+            getPods();
         }
 
         public void getCategories()
@@ -38,14 +42,30 @@ namespace testprojekt
                 }
             }
             comboBoxCat.SelectedIndex = 0;
-            
+
+        }
+
+        public void fillFrequencyBox()
+        {
+            comboBoxFreq.Items.Clear();
+
+            comboBoxFreq.Items.Add("Var 5:e minut");
+            comboBoxFreq.Items.Add("Var 10:e minut");
+            comboBoxFreq.Items.Add("Var 20:e minut");
+
+            comboBoxFreq.SelectedIndex = 0;
+        }
+
+        public void getPods()
+        {
+
         }
 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //lägg till ny pod
-            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            //uppdatera pod
+            
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -70,6 +90,12 @@ namespace testprojekt
         private void comboBoxFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            //podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            podController.test();
         }
     }
 }
