@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView2 = new System.Windows.Forms.ListView();
             this.btnSave = new System.Windows.Forms.Button();
             this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.comboBoxFreq = new System.Windows.Forms.ComboBox();
@@ -44,16 +43,8 @@
             this.btnRemovePod = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.episodeBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // listView2
-            // 
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(25, 328);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(287, 97);
-            this.listView2.TabIndex = 3;
-            this.listView2.UseCompatibleStateImageBehavior = false;
             // 
             // btnSave
             // 
@@ -159,6 +150,7 @@
             this.podBox.Name = "podBox";
             this.podBox.Size = new System.Drawing.Size(452, 196);
             this.podBox.TabIndex = 15;
+            this.podBox.SelectedIndexChanged += new System.EventHandler(this.podBox_SelectedIndexChanged);
             // 
             // btnRemovePod
             // 
@@ -187,11 +179,21 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "URL:";
             // 
+            // episodeBox
+            // 
+            this.episodeBox.FormattingEnabled = true;
+            this.episodeBox.ItemHeight = 16;
+            this.episodeBox.Location = new System.Drawing.Point(15, 320);
+            this.episodeBox.Name = "episodeBox";
+            this.episodeBox.Size = new System.Drawing.Size(368, 116);
+            this.episodeBox.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.episodeBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnRemovePod);
@@ -207,7 +209,6 @@
             this.Controls.Add(this.comboBoxFreq);
             this.Controls.Add(this.textBoxUrl);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.listView2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -216,7 +217,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox textBoxUrl;
         private System.Windows.Forms.ComboBox comboBoxFreq;
@@ -232,6 +232,7 @@
         private System.Windows.Forms.Button btnRemovePod;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox episodeBox;
     }
 }
 

@@ -34,6 +34,7 @@ namespace BL.Controllers
         public List<Episode> getEpisodes(string url)
         {
             //XmlReader rssReader = XmlReader.Create("https://www.svt.se/nyheter/rss.xml");
+            
             XmlReader rssReader = XmlReader.Create(url);
             SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
 
