@@ -63,7 +63,8 @@ namespace testprojekt
             {
                 if (item != null)
                 {
-                    podBox.Items.Add(item.Name + item.Frequency + item.Category);
+                    var episodeAmount = item.Episodes.Count().ToString();
+                    podBox.Items.Add(episodeAmount + item.Name + item.Frequency + item.Category);
                 }
             }
         }
@@ -101,8 +102,37 @@ namespace testprojekt
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            //validera
             podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
-            //podController.test();
+            getPods();
+        }
+
+        private void podBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //var podcastItem = podBox.SelectedItems;
+            episodeBox.Items.Clear();
+
+            if (podBox.SelectedItems.Count == 1)
+            {
+
+                var selectedPod = "creepy";   //ska vara selected item
+
+                foreach (var item in podController.getAllPods())
+                {
+
+                    if (item.Name.Equals(selectedPod))
+                    {
+
+                        foreach (var episodes in item.Episodes)
+                        {
+
+                            episodeBox.Items.Add(episodes.Name);
+                        }
+
+                    }
+
+                }
+            }
         }
     }
 }
