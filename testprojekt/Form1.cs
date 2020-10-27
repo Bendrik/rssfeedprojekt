@@ -25,7 +25,7 @@ namespace testprojekt
             podController = new PodController();
             getCategories();
             fillFrequencyBox();
-            getPods();
+            //getPods();
         }
 
         private void getCategories()
@@ -56,7 +56,7 @@ namespace testprojekt
             comboBoxFreq.SelectedIndex = 0;
         }
 
-        private void getPods()
+        /*private void getPods()
         {
             podBox.Items.Clear();
             foreach (var item in podController.getAllPods())
@@ -66,7 +66,7 @@ namespace testprojekt
                     podBox.Items.Add(item.Name + item.Frequency + item.Category);
                 }
             }
-        }
+        }*/
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -99,10 +99,25 @@ namespace testprojekt
 
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        private void btnNy_Click(object sender, EventArgs e)
         {
-            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            //podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
             //podController.test();
+        }
+
+        private void podBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewPodcast_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
