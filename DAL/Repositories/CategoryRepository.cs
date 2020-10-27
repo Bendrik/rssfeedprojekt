@@ -48,7 +48,6 @@ namespace DAL.Repositories
 
         public void SaveChanges()
         {
-
             try
             {
                 dataManager.Serialize(categoryList);
