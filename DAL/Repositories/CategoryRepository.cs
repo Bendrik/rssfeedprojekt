@@ -41,6 +41,11 @@ namespace DAL.Repositories
 
         }
 
+        public int GetIndex(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveChanges()
         {
 

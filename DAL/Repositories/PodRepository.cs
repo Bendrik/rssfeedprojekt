@@ -28,7 +28,8 @@ namespace DAL.Repositories
 
         public void Delete(int index)
         {
-            throw new NotImplementedException();
+            podList.RemoveAt(index);
+            SaveChanges();
         }
 
         public List<Pod> GetAll()
@@ -39,6 +40,11 @@ namespace DAL.Repositories
                 podListReturn = dataManager.Deserialize();
             }
             return podListReturn;
+        }
+
+        public int GetIndex(string name)
+        {
+            return GetAll().FindIndex(e => e.Name.Equals(name));
         }
 
         public void SaveChanges()

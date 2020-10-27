@@ -61,6 +61,7 @@ namespace testprojekt
         private void getPods()
         {
             dataGridViewPodcast.Rows.Clear();
+            dataGridViewEpisodes.Rows.Clear();
             lblEpisodeName.Text = "";
             episodeInfo.Text = "";
 
@@ -78,8 +79,18 @@ namespace testprojekt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //uppdatera pod
-            
+            string newName = txtPodName.Text;
+            string newUrl = textBoxUrl.Text;
+            string newFrequency = comboBoxFreq.SelectedItem.ToString();
+            string newCategory = comboBoxCat.SelectedItem.ToString();
+
+            string oldName = getSelectedPodName();
+
+            int podIndex = podController.getPodIndex(oldName);
+
+            podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
+
+
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -134,15 +145,42 @@ namespace testprojekt
 
         private void dataGridViewPodcast_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            fillPodcastBoxes();
             getEpisodes();
         }
         private void dataGridViewPodcast_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            fillPodcastBoxes();
             getEpisodes();
+        }
+
+        private void fillPodcastBoxes()
+        {
+            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+
+            string selectedPod = getSelectedPodName();
+
+            string selectedUrl = "";
+
+            foreach (var onePod in podController.getAllPods())
+            {
+                if (onePod.Name.Equals(selectedPod))
+                {
+                    selectedUrl = onePod.PodUrl;
+                }
+            }
+
+
+            txtPodName.Text = selectedPod;
+            textBoxUrl.Text = selectedUrl;
         }
 
         private void getEpisodes()
         {
+
+
             dataGridViewEpisodes.Rows.Clear();
             lblEpisodeName.Text = "";
             episodeInfo.Text = "";
@@ -150,9 +188,11 @@ namespace testprojekt
             //var selectedPod = "creepy";   //ska vara selected item
             string hej = dataGridViewPodcast.SelectedRows[0].Index.ToString();
 
-            int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
-            string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+
+            string selectedPod = getSelectedPodName();
 
             foreach (var onePod in podController.getAllPods())
             {
@@ -203,6 +243,27 @@ namespace testprojekt
         private void dataGridViewEpisodes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             getEpisodeDescription();
+        }
+
+        private void btnRemovePod_Click(object sender, EventArgs e)
+        {
+            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+
+            string selectedPod = getSelectedPodName();
+
+            podController.deletePod(selectedPod);
+            getPods();
+        }
+
+        private string getSelectedPodName()
+        {
+            int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+
+            return selectedPod;
         }
     }
 }

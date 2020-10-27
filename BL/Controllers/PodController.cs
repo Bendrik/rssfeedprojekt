@@ -7,6 +7,7 @@ using Models;
 using DAL.Repositories;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.Windows.Forms;
 
 namespace BL.Controllers
 {
@@ -32,9 +33,7 @@ namespace BL.Controllers
         }
 
         public List<Episode> getEpisodes(string url)
-        {
-            //XmlReader rssReader = XmlReader.Create("https://www.svt.se/nyheter/rss.xml");
-            
+        {            
             XmlReader rssReader = XmlReader.Create(url);
             SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
 
@@ -49,6 +48,33 @@ namespace BL.Controllers
             }
 
             return episodeList;
+        }
+
+        public void updatePod(string name, string url, string frequency, string category, int index)
+        {
+
+        }
+
+        public int getPodIndex(string name)
+        {
+            int index = podRepository.GetIndex(name);
+            return index;
+        }
+
+        public void deletePod(string name)
+        {
+            DialogResult dialogResult = MessageBox.Show("Vill du ta bort podcasten " + name + "?", "Bekräfta", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                int index = podRepository.GetIndex(name);
+                podRepository.Delete(index);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+
+            }
+            
         }
     }
 }
