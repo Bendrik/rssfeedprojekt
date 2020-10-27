@@ -13,5 +13,6 @@ namespace DAL.Repositories
         void Update(int index, T newEntity);
         List<T> GetAll();
         void SaveChanges();
+        int GetIndex(string name);
     }
 }

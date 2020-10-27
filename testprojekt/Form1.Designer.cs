@@ -176,6 +176,7 @@
             this.btnRemovePod.TabIndex = 16;
             this.btnRemovePod.Text = "ta bort";
             this.btnRemovePod.UseVisualStyleBackColor = true;
+            this.btnRemovePod.Click += new System.EventHandler(this.btnRemovePod_Click);
             // 
             // label2
             // 
