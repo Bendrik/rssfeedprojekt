@@ -54,6 +54,8 @@
             this.dataGridViewEpisodes = new System.Windows.Forms.DataGridView();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblEpisodeName = new System.Windows.Forms.Label();
+            this.episodeInfo = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPodcast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEpisodes)).BeginInit();
             this.SuspendLayout();
@@ -101,12 +103,12 @@
             this.txtCategory.Location = new System.Drawing.Point(772, 314);
             this.txtCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(179, 22);
+            this.txtCategory.Size = new System.Drawing.Size(277, 22);
             this.txtCategory.TabIndex = 8;
             // 
             // btnSaveCat
             // 
-            this.btnSaveCat.Location = new System.Drawing.Point(896, 345);
+            this.btnSaveCat.Location = new System.Drawing.Point(856, 345);
             this.btnSaveCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSaveCat.Name = "btnSaveCat";
             this.btnSaveCat.Size = new System.Drawing.Size(107, 27);
@@ -141,7 +143,7 @@
             this.btnNewCat.Location = new System.Drawing.Point(772, 345);
             this.btnNewCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNewCat.Name = "btnNewCat";
-            this.btnNewCat.Size = new System.Drawing.Size(107, 26);
+            this.btnNewCat.Size = new System.Drawing.Size(78, 26);
             this.btnNewCat.TabIndex = 12;
             this.btnNewCat.Text = "ny";
             this.btnNewCat.UseVisualStyleBackColor = true;
@@ -203,12 +205,14 @@
             this.Column2,
             this.Column5});
             this.dataGridViewPodcast.Location = new System.Drawing.Point(16, 15);
-            this.dataGridViewPodcast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewPodcast.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewPodcast.Name = "dataGridViewPodcast";
             this.dataGridViewPodcast.ReadOnly = true;
             this.dataGridViewPodcast.RowHeadersWidth = 51;
+            this.dataGridViewPodcast.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPodcast.Size = new System.Drawing.Size(749, 276);
             this.dataGridViewPodcast.TabIndex = 19;
+            this.dataGridViewPodcast.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPodcast_CellClick);
             this.dataGridViewPodcast.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPodcast_CellContentClick_1);
             // 
             // Column1
@@ -289,12 +293,14 @@
             this.dataGridViewEpisodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column6});
             this.dataGridViewEpisodes.Location = new System.Drawing.Point(19, 401);
-            this.dataGridViewEpisodes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewEpisodes.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEpisodes.Name = "dataGridViewEpisodes";
             this.dataGridViewEpisodes.ReadOnly = true;
             this.dataGridViewEpisodes.RowHeadersWidth = 51;
-            this.dataGridViewEpisodes.Size = new System.Drawing.Size(747, 279);
+            this.dataGridViewEpisodes.Size = new System.Drawing.Size(619, 279);
             this.dataGridViewEpisodes.TabIndex = 23;
+            this.dataGridViewEpisodes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEpisodes_CellClick);
+            this.dataGridViewEpisodes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEpisodes_CellContentClick);
             // 
             // Column6
             // 
@@ -307,19 +313,37 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(772, 375);
+            this.button1.Location = new System.Drawing.Point(969, 346);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 26);
+            this.button1.Size = new System.Drawing.Size(80, 26);
             this.button1.TabIndex = 24;
             this.button1.Text = "ta bort";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // lblEpisodeName
+            // 
+            this.lblEpisodeName.AutoSize = true;
+            this.lblEpisodeName.Location = new System.Drawing.Point(689, 401);
+            this.lblEpisodeName.Name = "lblEpisodeName";
+            this.lblEpisodeName.Size = new System.Drawing.Size(0, 17);
+            this.lblEpisodeName.TabIndex = 26;
+            // 
+            // episodeInfo
+            // 
+            this.episodeInfo.Location = new System.Drawing.Point(692, 431);
+            this.episodeInfo.Name = "episodeInfo";
+            this.episodeInfo.Size = new System.Drawing.Size(357, 249);
+            this.episodeInfo.TabIndex = 27;
+            this.episodeInfo.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1569, 778);
+            this.Controls.Add(this.episodeInfo);
+            this.Controls.Add(this.lblEpisodeName);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewEpisodes);
             this.Controls.Add(this.label6);
@@ -377,6 +401,8 @@
         private System.Windows.Forms.DataGridView dataGridViewEpisodes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblEpisodeName;
+        private System.Windows.Forms.RichTextBox episodeInfo;
     }
 }
 
