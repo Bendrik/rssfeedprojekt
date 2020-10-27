@@ -25,7 +25,7 @@ namespace testprojekt
             podController = new PodController();
             getCategories();
             fillFrequencyBox();
-            //getPods();
+            getPods();
         }
 
         private void getCategories()
@@ -56,17 +56,19 @@ namespace testprojekt
             comboBoxFreq.SelectedIndex = 0;
         }
 
-        /*private void getPods()
+        private void getPods()
         {
-            podBox.Items.Clear();
+            dataGridViewPodcast.Rows.Clear();
             foreach (var item in podController.getAllPods())
             {
                 if (item != null)
                 {
-                    podBox.Items.Add(item.Name + item.Frequency + item.Category);
+                    var episodeAmount = item.Episodes.Count().ToString();
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
                 }
             }
-        }*/
+            dataGridViewPodcast.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -101,7 +103,7 @@ namespace testprojekt
 
         private void btnNy_Click(object sender, EventArgs e)
         {
-            //podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
             //podController.test();
         }
 
@@ -118,6 +120,35 @@ namespace testprojekt
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridViewPodcast_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewEpisodes.Rows.Clear();
+
+            //if (dataGridViewPodcast.SelectedItems.Count == 1)
+            //{
+
+                var selectedPod = "creepy";   //ska vara selected item
+
+                foreach (var item in podController.getAllPods())
+                {
+
+                    if (item.Name.Equals(selectedPod))
+                    {
+
+                        foreach (var episodes in item.Episodes)
+                        {
+
+                            dataGridViewEpisodes.Rows.Add(episodes.Name);
+                        }
+                    
+                    dataGridViewEpisodes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                }
+
+                }
+            //}
         }
     }
 }

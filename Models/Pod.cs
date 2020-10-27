@@ -16,7 +16,7 @@ namespace Models
        
         public List<Episode> Episodes { get; set; }
         
-        public Pod (string name, string podUrl, string frequency, string category, string NewEpisode, List<Episode> episodes) : base (name)
+        public Pod (string name, string podUrl, string frequency, string category, List<Episode> episodes) : base (name)
         {
             Name = name;
             PodUrl = podUrl;
