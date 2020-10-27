@@ -18,13 +18,13 @@ namespace BL.Controllers
             podRepository = new PodRepository();
         }
 
-        public void CreatePod(string name, string url, string frequency, string category)
+        /*public void CreatePod(string name, string url, string frequency, string category)
         {
             //List<Episode> = new List<Episode> getEpisodes();
             List<Episode> episodes = getEpisodes(url);
             Pod newPod = new Pod(name, url, frequency, category, episodes);
             podRepository.Create(newPod);
-        }
+        }*/
 
         public List<Pod> getAllPods()
         {

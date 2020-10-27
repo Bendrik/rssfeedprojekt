@@ -25,7 +25,7 @@ namespace testprojekt
             podController = new PodController();
             getCategories();
             fillFrequencyBox();
-            getPods();
+            //getPods();
         }
 
         private void getCategories()
@@ -56,18 +56,17 @@ namespace testprojekt
             comboBoxFreq.SelectedIndex = 0;
         }
 
-        private void getPods()
+        /*private void getPods()
         {
             podBox.Items.Clear();
             foreach (var item in podController.getAllPods())
             {
                 if (item != null)
                 {
-                    var episodeAmount = item.Episodes.Count().ToString();
-                    podBox.Items.Add(episodeAmount + item.Name + item.Frequency + item.Category);
+                    podBox.Items.Add(item.Name + item.Frequency + item.Category);
                 }
             }
-        }
+        }*/
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -100,39 +99,25 @@ namespace testprojekt
 
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        private void btnNy_Click(object sender, EventArgs e)
         {
-            //validera
-            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
-            getPods();
+            //podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+            //podController.test();
         }
 
         private void podBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var podcastItem = podBox.SelectedItems;
-            episodeBox.Items.Clear();
 
-            if (podBox.SelectedItems.Count == 1)
-            {
+        }
 
-                var selectedPod = "creepy";   //ska vara selected item
+        private void dataGridViewPodcast_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-                foreach (var item in podController.getAllPods())
-                {
+        }
 
-                    if (item.Name.Equals(selectedPod))
-                    {
+        private void label1_Click(object sender, EventArgs e)
+        {
 
-                        foreach (var episodes in item.Episodes)
-                        {
-
-                            episodeBox.Items.Add(episodes.Name);
-                        }
-
-                    }
-
-                }
-            }
         }
     }
 }
