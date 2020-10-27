@@ -26,6 +26,8 @@ namespace testprojekt
             getCategories();
             fillFrequencyBox();
             getPods();
+
+            dataGridViewPodcast.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void getCategories()
@@ -58,15 +60,19 @@ namespace testprojekt
 
         private void getPods()
         {
-            podBox.Items.Clear();
+            dataGridViewPodcast.Rows.Clear();
+            lblEpisodeName.Text = "";
+            episodeInfo.Text = "";
+
             foreach (var item in podController.getAllPods())
             {
                 if (item != null)
                 {
                     var episodeAmount = item.Episodes.Count().ToString();
-                    podBox.Items.Add(episodeAmount + item.Name + item.Frequency + item.Category);
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
                 }
             }
+            
         }
 
 
@@ -100,39 +106,103 @@ namespace testprojekt
 
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        private void btnNy_Click(object sender, EventArgs e)
         {
-            //validera
             podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
             getPods();
         }
 
         private void podBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var podcastItem = podBox.SelectedItems;
-            episodeBox.Items.Clear();
 
-            if (podBox.SelectedItems.Count == 1)
+        }
+
+        private void dataGridViewPodcast_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            getEpisodeDescription();
+        }
+        //private void dataGridViewEpisode_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    getEpisodeDescription();
+        //}
+
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewPodcast_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            getEpisodes();
+        }
+        private void dataGridViewPodcast_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            getEpisodes();
+        }
+
+        private void getEpisodes()
+        {
+            dataGridViewEpisodes.Rows.Clear();
+            lblEpisodeName.Text = "";
+            episodeInfo.Text = "";
+
+            //var selectedPod = "creepy";   //ska vara selected item
+            string hej = dataGridViewPodcast.SelectedRows[0].Index.ToString();
+
+            int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+
+            foreach (var onePod in podController.getAllPods())
             {
 
-                var selectedPod = "creepy";   //ska vara selected item
-
-                foreach (var item in podController.getAllPods())
+                if (onePod.Name.Equals(selectedPod))
                 {
 
-                    if (item.Name.Equals(selectedPod))
+                    foreach (var episodes in onePod.Episodes)
                     {
 
-                        foreach (var episodes in item.Episodes)
-                        {
-
-                            episodeBox.Items.Add(episodes.Name);
-                        }
-
+                        dataGridViewEpisodes.Rows.Add(episodes.Name);
                     }
 
+                    dataGridViewEpisodes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                }
+
+            }
+        }
+
+        private void getEpisodeDescription()
+        {
+            episodeInfo.Clear();
+
+            int selectedrowindex = dataGridViewEpisodes.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridViewEpisodes.Rows[selectedrowindex];
+            string selectedEpisode = Convert.ToString(selectedRow.Cells[0].Value);
+
+            foreach (var onePod in podController.getAllPods())
+            {
+                foreach (var episode in onePod.Episodes)
+                {
+                    if (episode.Name.Equals(selectedEpisode))
+                    {
+                        lblEpisodeName.Text = episode.Name;
+                        episodeInfo.Text = episode.Description;
+                    }
                 }
             }
+
+        }
+
+        private void dataGridViewEpisodes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            getEpisodeDescription();
+        }
+
+        private void dataGridViewEpisodes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            getEpisodeDescription();
         }
     }
 }

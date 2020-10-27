@@ -33,7 +33,10 @@ namespace DAL.Repositories
         {
 
             List<Category> categoryListReturn = new List<Category>();
-            categoryListReturn = dataManager.Deserialize();
+            if (categoryListReturn != null)
+            {
+                categoryListReturn = dataManager.Deserialize();
+            }
             return categoryListReturn;
 
         }

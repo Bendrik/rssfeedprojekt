@@ -34,7 +34,10 @@ namespace DAL.Repositories
         public List<Pod> GetAll()
         {
             List<Pod> podListReturn = new List<Pod>();
-            podListReturn = dataManager.Deserialize();
+            if (podListReturn != null)
+            {
+                podListReturn = dataManager.Deserialize();
+            }
             return podListReturn;
         }
 
