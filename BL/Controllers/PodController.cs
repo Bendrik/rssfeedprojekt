@@ -52,7 +52,9 @@ namespace BL.Controllers
 
         public void updatePod(string name, string url, string frequency, string category, int index)
         {
-
+            List<Episode> episodeList = getEpisodes(url);
+            Pod newPod = new Pod(name, url, frequency, category, episodeList);
+            podRepository.Update(index, newPod);
         }
 
         public int getPodIndex(string name)

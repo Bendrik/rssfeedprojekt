@@ -54,7 +54,11 @@ namespace DAL.Repositories
 
         public void Update(int index, Pod newEntity)
         {
-            throw new NotImplementedException();
+            if (index >= 0)
+            {
+                podList[index] = newEntity;
+            }
+            SaveChanges();
         }
     }
 }

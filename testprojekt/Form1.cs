@@ -76,9 +76,9 @@ namespace testprojekt
             
         }
 
-
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //uppdatera podinfo
             string newName = txtPodName.Text;
             string newUrl = textBoxUrl.Text;
             string newFrequency = comboBoxFreq.SelectedItem.ToString();
@@ -89,8 +89,7 @@ namespace testprojekt
             int podIndex = podController.getPodIndex(oldName);
 
             podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
-
-
+            getPods();
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -123,20 +122,10 @@ namespace testprojekt
             getPods();
         }
 
-        private void podBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridViewPodcast_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             getEpisodeDescription();
         }
-        //private void dataGridViewEpisode_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    getEpisodeDescription();
-        //}
-
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -156,10 +145,6 @@ namespace testprojekt
 
         private void fillPodcastBoxes()
         {
-            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
-            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
-            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
-
             string selectedPod = getSelectedPodName();
 
             string selectedUrl = "";
@@ -179,18 +164,9 @@ namespace testprojekt
 
         private void getEpisodes()
         {
-
-
             dataGridViewEpisodes.Rows.Clear();
             lblEpisodeName.Text = "";
             episodeInfo.Text = "";
-
-            //var selectedPod = "creepy";   //ska vara selected item
-            string hej = dataGridViewPodcast.SelectedRows[0].Index.ToString();
-
-            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
-            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
-            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
 
             string selectedPod = getSelectedPodName();
 
@@ -247,10 +223,6 @@ namespace testprojekt
 
         private void btnRemovePod_Click(object sender, EventArgs e)
         {
-            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
-            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
-            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
-
             string selectedPod = getSelectedPodName();
 
             podController.deletePod(selectedPod);

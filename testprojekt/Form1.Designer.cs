@@ -81,6 +81,7 @@
             // 
             // comboBoxFreq
             // 
+            this.comboBoxFreq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFreq.FormattingEnabled = true;
             this.comboBoxFreq.Location = new System.Drawing.Point(333, 313);
             this.comboBoxFreq.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -91,6 +92,7 @@
             // 
             // comboBoxCat
             // 
+            this.comboBoxCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCat.FormattingEnabled = true;
             this.comboBoxCat.Location = new System.Drawing.Point(333, 363);
             this.comboBoxCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
