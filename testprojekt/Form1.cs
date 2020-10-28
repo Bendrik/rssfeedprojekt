@@ -78,6 +78,7 @@ namespace testprojekt
         private void btnSave_Click(object sender, EventArgs e)
         {
             //uppdatera podinfo
+            //behövs validering
             string newName = txtPodName.Text;
             string newUrl = textBoxUrl.Text;
             string newFrequency = comboBoxFreq.SelectedItem.ToString();
@@ -117,6 +118,7 @@ namespace testprojekt
 
         private void btnNy_Click(object sender, EventArgs e)
         {
+            //behövs validering
             podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
             getPods();
         }
