@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Exceptions;
 using Models;
 
 namespace DAL.Repositories
@@ -35,14 +36,25 @@ namespace DAL.Repositories
         public List<Pod> GetAll()
         {
             List<Pod> podListReturn = new List<Pod>();
-            if (podListReturn != null)
+            try
             {
-                podListReturn = dataManager.Deserialize();
+                
+                if (podListReturn != null)
+                {
+                    podListReturn = dataManager.Deserialize();
+                }
+                
             }
+            catch (SerializerException)
+            {
+
+                Console.WriteLine("kunde inte deserialize:a pods.xml");
+            }
+            
             return podListReturn;
         }
 
-        public int GetIndex(string name)
+            public int GetIndex(string name)
         {
             return GetAll().FindIndex(e => e.Name.Equals(name));
         }

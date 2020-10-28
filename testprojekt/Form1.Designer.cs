@@ -56,6 +56,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblEpisodeName = new System.Windows.Forms.Label();
             this.episodeInfo = new System.Windows.Forms.RichTextBox();
+            this.btnRemoveFilter = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPodcast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEpisodes)).BeginInit();
             this.SuspendLayout();
@@ -340,11 +342,33 @@
             this.episodeInfo.TabIndex = 27;
             this.episodeInfo.Text = "";
             // 
+            // btnRemoveFilter
+            // 
+            this.btnRemoveFilter.Location = new System.Drawing.Point(974, 5);
+            this.btnRemoveFilter.Name = "btnRemoveFilter";
+            this.btnRemoveFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveFilter.TabIndex = 29;
+            this.btnRemoveFilter.Text = "Nollställ";
+            this.btnRemoveFilter.UseVisualStyleBackColor = true;
+            this.btnRemoveFilter.Click += new System.EventHandler(this.btnRemoveFilter_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(893, 5);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 30;
+            this.btnFilter.Text = "Filtrera";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1569, 778);
+            this.ClientSize = new System.Drawing.Size(1074, 702);
+            this.Controls.Add(this.btnFilter);
+            this.Controls.Add(this.btnRemoveFilter);
             this.Controls.Add(this.episodeInfo);
             this.Controls.Add(this.lblEpisodeName);
             this.Controls.Add(this.button1);
@@ -406,6 +430,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblEpisodeName;
         private System.Windows.Forms.RichTextBox episodeInfo;
+        private System.Windows.Forms.Button btnRemoveFilter;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 
