@@ -41,10 +41,9 @@ namespace testprojekt
                 {
                     catList.Items.Add(item.Name);
                     comboBoxCat.Items.Add(item.Name);
+                    comboBoxCat.SelectedIndex = 0;
                 }
             }
-            comboBoxCat.SelectedIndex = 0;
-
         }
 
         private void fillFrequencyBox()
@@ -236,6 +235,30 @@ namespace testprojekt
             string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
 
             return selectedPod;
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            dataGridViewPodcast.Rows.Clear();
+            dataGridViewEpisodes.Rows.Clear();
+            lblEpisodeName.Text = "";
+            episodeInfo.Text = "";
+
+            string category = catList.SelectedItem.ToString();
+
+            foreach (var item in podController.getAllPods())
+            {
+                if (item.Category.Equals(category))
+                {
+                    var episodeAmount = item.Episodes.Count().ToString();
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
+                }
+            }
+        }
+
+        private void btnRemoveFilter_Click(object sender, EventArgs e)
+        {
+            getPods();
         }
     }
 }

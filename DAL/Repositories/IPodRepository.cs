@@ -9,6 +9,6 @@ namespace DAL.Repositories
 {
     public interface IPodRepository<T>:IRepository<T> where T:Pod
     {
-    
+
     }
 }
