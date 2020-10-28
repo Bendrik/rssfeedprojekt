@@ -8,12 +8,13 @@ using DAL.Repositories;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace BL.Controllers
 {
     public class PodController
     {
-        IRepository<Pod> podRepository;
+        IPodRepository<Pod> podRepository;
         public PodController()
         {
             podRepository = new PodRepository();
@@ -34,20 +35,7 @@ namespace BL.Controllers
 
         public List<Episode> getEpisodes(string url)
         {            
-            XmlReader rssReader = XmlReader.Create(url);
-            SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
-
-            List<Episode> episodeList = new List<Episode>();
-
-            foreach (var item in rssFeed.Items)
-            {
-                Episode newEpisode = new Episode();
-                newEpisode.Name = item.Title.Text;
-                newEpisode.Description = item.Summary.Text;
-                episodeList.Add(newEpisode);
-            }
-
-            return episodeList;
+            return podRepository.getEpisodes(url);
         }
 
         public void updatePod(string name, string url, string frequency, string category, int index)
