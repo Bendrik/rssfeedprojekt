@@ -15,6 +15,7 @@ namespace BL.Controllers
     public class PodController
     {
         IPodRepository<Pod> podRepository;
+
         public DateTime NextUpdate { get; set; }
         public PodController()
         {
@@ -65,6 +66,7 @@ namespace BL.Controllers
         {
             return podRepository.GetAll();
         }
+
 
         //public List<Episode> getEpisodes(string url)
         //{            

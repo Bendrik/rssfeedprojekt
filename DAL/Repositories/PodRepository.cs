@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using DAL.Exceptions;
 using Models;
 
@@ -10,9 +12,6 @@ namespace DAL.Repositories
 {
     public class PodRepository : IPodRepository<Pod>
     {
-
-        //"https://api.sr.se/api/rss/pod/22209" title="Creepypodden i P3"
-
         DataManager dataManager;
         List<Pod> podList;
         public PodRepository()
@@ -54,7 +53,26 @@ namespace DAL.Repositories
             return podListReturn;
         }
 
+        public List<Episode> getEpisodes(string url)
+        {
+            XmlReader rssReader = XmlReader.Create(url);
+            SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
+
+            List<Episode> episodeList = new List<Episode>();
+
+            foreach (var item in rssFeed.Items)
+            {
+                Episode newEpisode = new Episode();
+                newEpisode.Name = item.Title.Text;
+                newEpisode.Description = item.Summary.Text;
+                episodeList.Add(newEpisode);
+            }
+
+            return episodeList;
+        }
+
         public int GetIndexOfName(string name)
+
         {
             return GetAll().FindIndex(e => e.Name.Equals(name));
         }
