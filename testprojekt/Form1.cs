@@ -104,8 +104,22 @@ namespace testprojekt
 
         private void btnSaveCat_Click(object sender, EventArgs e)
         {
-            //uppdatera kategori i xml
-            //getCategories();
+            string selectedCat = getSelectedCat();
+            string newCatName = txtCategory.Text;
+
+            categoryController.updateCategory(selectedCat, newCatName);
+            {
+                foreach (var onePod in podController.getAllPods())
+                {
+                    if (onePod.Category.Equals(selectedCat))
+                    {
+                        //int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+                        //podController.updatePod(onePod.Name + resten);
+                    }
+                }
+                getCategories();
+                getPods();
+            }
         }
 
         private void btnNewCat_Click(object sender, EventArgs e)
@@ -120,7 +134,7 @@ namespace testprojekt
 
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //tror inte denna behövs (action när man trycker på en kategori i listan)
+            txtCategory.Text = getSelectedCat();
         }
 
         private void comboBoxFreq_SelectedIndexChanged(object sender, EventArgs e)
@@ -304,7 +318,6 @@ namespace testprojekt
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             getPods();
-
         }
     }
 }

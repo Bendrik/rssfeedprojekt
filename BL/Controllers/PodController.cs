@@ -42,14 +42,6 @@ namespace BL.Controllers
             }
             
         }
-        //public bool podUpdate
-        //{
-
-        //    get
-        //    {
-        //        return NextUpdate <= DateTime.Now;
-        //    }
-        //}
 
         public void CreatePod(string name, string url, string frequency, string category)
         {
@@ -63,7 +55,6 @@ namespace BL.Controllers
         {
             return podRepository.GetAll();
         }
-
         public void updatePod(string name, string url, string frequency, string category, int index)
         {
             List<Episode> episodeList = podRepository.getEpisodes(url);
@@ -94,11 +85,10 @@ namespace BL.Controllers
                 //podRepository.Delete(index);
                 return true;
             }
-            else //if (dialogResult == DialogResult.No)
+            else
             {
                 return false;
-            }
-            
+            }       
         }
 
         public void deletePod(int index)

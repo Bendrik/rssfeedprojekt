@@ -170,6 +170,7 @@
             this.catList.Name = "catList";
             this.catList.Size = new System.Drawing.Size(277, 260);
             this.catList.TabIndex = 14;
+            this.catList.SelectedIndexChanged += new System.EventHandler(this.catList_SelectedIndexChanged);
             // 
             // btnRemovePod
             // 

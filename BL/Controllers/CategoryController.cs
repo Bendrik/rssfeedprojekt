@@ -52,5 +52,11 @@ namespace BL.Controllers
             }
             return false;
         }
+        public void updateCategory(string name, string newName)
+        {
+            int index = getCatIndex(name);
+            Category newCategory = new Category(newName);
+            categoryRepository.Update(index, newCategory);
+        }
     }
 }
