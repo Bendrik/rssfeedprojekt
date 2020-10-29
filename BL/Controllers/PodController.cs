@@ -26,38 +26,35 @@ namespace BL.Controllers
         {
             foreach (var onePod in getAllPods())
             {
-                //onePod.NextUpdate = DateTime.Now;
                 NextUpdate = onePod.NextUpdate;
-                //Console.WriteLine(onePod.Name + " " + NextUpdate + " " + podUpdate);
                 int interval = Int32.Parse(onePod.Frequency);
-                if (podUpdate)
+
+                if (onePod.podUpdate)
                 {
-                    Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
+                    //Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
                     onePod.NextUpdate = DateTime.Now.AddSeconds(interval);
-                    Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
+                    int index = GetPodIndexOfName(onePod.Name);
+                    List<Episode> episodes = podRepository.getEpisodes(onePod.PodUrl);
+                    Pod newPod = new Pod(onePod.Name, onePod.PodUrl, onePod.Frequency, onePod.Category, onePod.NextUpdate, episodes);
+                    podRepository.Update(index, newPod);
+                    //Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
                 }
             }
             
         }
-        public bool podUpdate
-        {
-
-            get
-            {
-                return NextUpdate <= DateTime.Now;
-            }
-        }
-
-        //public string Update(frequency)
+        //public bool podUpdate
         //{
-        //    NextUpdate = DateTime.Now.AddMinutes(UpdateInterval);
-        //    return Name + "'s Update() was invoked. Next update is at " + NextUpdate;
+
+        //    get
+        //    {
+        //        return NextUpdate <= DateTime.Now;
+        //    }
         //}
 
         public void CreatePod(string name, string url, string frequency, string category)
         {
             List<Episode> episodes = podRepository.getEpisodes(url);
-            DateTime nextUpdate = new DateTime(0001, 0, 0);
+            DateTime nextUpdate = DateTime.Now;
             Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodes);
             podRepository.Create(newPod);
         }
@@ -67,16 +64,10 @@ namespace BL.Controllers
             return podRepository.GetAll();
         }
 
-
-        //public List<Episode> getEpisodes(string url)
-        //{            
-        //    return podRepository.getEpisodes(url);
-        //}
-
         public void updatePod(string name, string url, string frequency, string category, int index)
         {
             List<Episode> episodeList = podRepository.getEpisodes(url);
-            DateTime nextUpdate = new DateTime(0001, 0, 0);
+            DateTime nextUpdate = DateTime.Now;
             Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
             podRepository.Update(index, newPod);
         }
@@ -99,8 +90,8 @@ namespace BL.Controllers
 
             if (dialogResult == DialogResult.Yes)
             {
-                int index = podRepository.GetIndexOfName(name);
-                podRepository.Delete(index);
+                //int index = podRepository.GetIndexOfName(name);
+                //podRepository.Delete(index);
                 return true;
             }
             else //if (dialogResult == DialogResult.No)

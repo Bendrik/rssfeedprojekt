@@ -32,22 +32,11 @@ namespace testprojekt
 
             theTimer.Interval = 1000;
             theTimer.Tick += theTimer_Tick;
-            theTimer.Start();
-
-            //foreach (var onePod in podController.getAllPods())
-            //{
-            //    onePod.NextUpdate = DateTime.Now;
-            //    //NextUpdate = onePod.NextUpdate;
-            //}
+            theTimer.Start();        
         }
 
-            private void theTimer_Tick(object sender, EventArgs e)
+        private void theTimer_Tick(object sender, EventArgs e)
         {
-            //foreach (var onePod in podController.getAllPods())
-            //{
-            //    int interval = Int32.Parse(onePod.Frequency);
-            //    podController.FixUpdate(interval);
-            //}
             podController.FixUpdate();
         }
 
@@ -269,28 +258,21 @@ namespace testprojekt
         private void btnRemoveCat_Click(object sender, EventArgs e)
         {
             string selectedCat = getSelectedCat();
-            int podIndex = podController.GetPodIndexOfCategory(selectedCat);
 
-            foreach (var checkPodCat in podController.getAllPods())
-            {
-                Console.WriteLine(checkPodCat + selectedCat);
-
-                if (checkPodCat.Category.Equals(selectedCat))
+            if (categoryController.removeCategory(selectedCat))
+            { 
+                foreach (var checkPodCat in podController.getAllPods())
                 {
+                    Console.WriteLine(checkPodCat + selectedCat);
 
-                    if (podController.deletePod(selectedCat))
+                    if (checkPodCat.Category.Equals(selectedCat))
                     {
-                        podController.deletePod(podIndex);
-                        getPods();
-                        categoryController.removeCategory(selectedCat);
-                        getCategories();
+                        int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+                        podController.deletePod(podIndex);                       
                     }
                 }
-                else
-                {
-
-                }
-
+                getCategories();
+                getPods();
             }
         }
 

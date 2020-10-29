@@ -27,7 +27,8 @@ namespace DAL.Repositories
 
         public void Delete(int index)
         {
-            throw new NotImplementedException();
+            categoryList.RemoveAt(index);
+            SaveChanges();
         }
 
         public List<Category> GetAll()
@@ -52,9 +53,9 @@ namespace DAL.Repositories
 
         }
 
-        public int GetIndex(string name)
+        public int GetIndexOfName(string name)
         {
-            throw new NotImplementedException();
+            return GetAll().FindIndex(e => e.Name.Equals(name));
         }
 
         public void SaveChanges()

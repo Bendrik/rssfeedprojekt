@@ -64,10 +64,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(729, 438);
+            this.btnSave.Location = new System.Drawing.Point(542, 356);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(121, 32);
+            this.btnSave.Size = new System.Drawing.Size(109, 27);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Uppdatera";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             // 
             // textBoxUrl
             // 
-            this.textBoxUrl.Location = new System.Drawing.Point(25, 443);
+            this.textBoxUrl.Location = new System.Drawing.Point(19, 361);
             this.textBoxUrl.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(269, 22);
@@ -96,7 +96,7 @@
             // 
             this.comboBoxCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCat.FormattingEnabled = true;
-            this.comboBoxCat.Location = new System.Drawing.Point(444, 442);
+            this.comboBoxCat.Location = new System.Drawing.Point(333, 359);
             this.comboBoxCat.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.comboBoxCat.Name = "comboBoxCat";
             this.comboBoxCat.Size = new System.Drawing.Size(191, 24);
@@ -104,7 +104,7 @@
             // 
             // txtCategory
             // 
-            this.txtCategory.Location = new System.Drawing.Point(776, 313);
+            this.txtCategory.Location = new System.Drawing.Point(825, 314);
             this.txtCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(277, 22);
@@ -112,10 +112,10 @@
             // 
             // btnSaveCat
             // 
-            this.btnSaveCat.Location = new System.Drawing.Point(776, 375);
+            this.btnSaveCat.Location = new System.Drawing.Point(905, 346);
             this.btnSaveCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSaveCat.Name = "btnSaveCat";
-            this.btnSaveCat.Size = new System.Drawing.Size(191, 27);
+            this.btnSaveCat.Size = new System.Drawing.Size(99, 27);
             this.btnSaveCat.TabIndex = 9;
             this.btnSaveCat.Text = "Uppdatera";
             this.btnSaveCat.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(772, 11);
+            this.label1.Location = new System.Drawing.Point(821, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 10;
@@ -133,10 +133,10 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(418, 345);
+            this.btnNew.Location = new System.Drawing.Point(542, 311);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(271, 32);
+            this.btnNew.Size = new System.Drawing.Size(223, 26);
             this.btnNew.TabIndex = 11;
             this.btnNew.Text = "Ny";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -144,10 +144,10 @@
             // 
             // btnNewCat
             // 
-            this.btnNewCat.Location = new System.Drawing.Point(776, 345);
+            this.btnNewCat.Location = new System.Drawing.Point(825, 346);
             this.btnNewCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNewCat.Name = "btnNewCat";
-            this.btnNewCat.Size = new System.Drawing.Size(191, 26);
+            this.btnNewCat.Size = new System.Drawing.Size(74, 26);
             this.btnNewCat.TabIndex = 12;
             this.btnNewCat.Text = "Ny";
             this.btnNewCat.UseVisualStyleBackColor = true;
@@ -165,7 +165,7 @@
             // 
             this.catList.FormattingEnabled = true;
             this.catList.ItemHeight = 16;
-            this.catList.Location = new System.Drawing.Point(776, 30);
+            this.catList.Location = new System.Drawing.Point(825, 31);
             this.catList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.catList.Name = "catList";
             this.catList.Size = new System.Drawing.Size(277, 260);
@@ -173,10 +173,10 @@
             // 
             // btnRemovePod
             // 
-            this.btnRemovePod.Location = new System.Drawing.Point(873, 438);
+            this.btnRemovePod.Location = new System.Drawing.Point(659, 356);
             this.btnRemovePod.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnRemovePod.Name = "btnRemovePod";
-            this.btnRemovePod.Size = new System.Drawing.Size(127, 32);
+            this.btnRemovePod.Size = new System.Drawing.Size(106, 27);
             this.btnRemovePod.TabIndex = 16;
             this.btnRemovePod.Text = "Ta bort";
             this.btnRemovePod.UseVisualStyleBackColor = true;
@@ -194,7 +194,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 417);
+            this.label3.Location = new System.Drawing.Point(14, 342);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 17);
@@ -211,7 +211,7 @@
             this.Column2,
             this.Column5});
             this.dataGridViewPodcast.Location = new System.Drawing.Point(16, 15);
-            this.dataGridViewPodcast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewPodcast.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewPodcast.Name = "dataGridViewPodcast";
             this.dataGridViewPodcast.ReadOnly = true;
             this.dataGridViewPodcast.RowHeadersWidth = 51;
@@ -278,7 +278,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(439, 420);
+            this.label5.Location = new System.Drawing.Point(328, 337);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 17);
@@ -288,7 +288,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(772, 293);
+            this.label6.Location = new System.Drawing.Point(821, 294);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 17);
             this.label6.TabIndex = 22;
@@ -299,12 +299,12 @@
             this.dataGridViewEpisodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEpisodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column6});
-            this.dataGridViewEpisodes.Location = new System.Drawing.Point(19, 401);
-            this.dataGridViewEpisodes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewEpisodes.Location = new System.Drawing.Point(19, 413);
+            this.dataGridViewEpisodes.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEpisodes.Name = "dataGridViewEpisodes";
             this.dataGridViewEpisodes.ReadOnly = true;
             this.dataGridViewEpisodes.RowHeadersWidth = 51;
-            this.dataGridViewEpisodes.Size = new System.Drawing.Size(619, 279);
+            this.dataGridViewEpisodes.Size = new System.Drawing.Size(665, 279);
             this.dataGridViewEpisodes.TabIndex = 23;
             this.dataGridViewEpisodes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEpisodes_CellClick);
             this.dataGridViewEpisodes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEpisodes_CellContentClick);
@@ -320,10 +320,10 @@
             // 
             // btnRemoveCat
             // 
-            this.btnRemoveCat.Location = new System.Drawing.Point(776, 407);
+            this.btnRemoveCat.Location = new System.Drawing.Point(1010, 347);
             this.btnRemoveCat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRemoveCat.Name = "btnRemoveCat";
-            this.btnRemoveCat.Size = new System.Drawing.Size(191, 26);
+            this.btnRemoveCat.Size = new System.Drawing.Size(92, 26);
             this.btnRemoveCat.TabIndex = 24;
             this.btnRemoveCat.Text = "Ta Bort Kategori";
             this.btnRemoveCat.UseVisualStyleBackColor = true;
@@ -332,14 +332,14 @@
             // lblEpisodeName
             // 
             this.lblEpisodeName.AutoSize = true;
-            this.lblEpisodeName.Location = new System.Drawing.Point(689, 401);
+            this.lblEpisodeName.Location = new System.Drawing.Point(742, 407);
             this.lblEpisodeName.Name = "lblEpisodeName";
             this.lblEpisodeName.Size = new System.Drawing.Size(0, 17);
             this.lblEpisodeName.TabIndex = 26;
             // 
             // episodeInfo
             // 
-            this.episodeInfo.Location = new System.Drawing.Point(692, 438);
+            this.episodeInfo.Location = new System.Drawing.Point(745, 450);
             this.episodeInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.episodeInfo.Name = "episodeInfo";
             this.episodeInfo.Size = new System.Drawing.Size(357, 242);
@@ -348,10 +348,10 @@
             // 
             // btnRemoveFilter
             // 
-            this.btnRemoveFilter.Location = new System.Drawing.Point(1299, 6);
-            this.btnRemoveFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveFilter.Location = new System.Drawing.Point(1024, 5);
+            this.btnRemoveFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveFilter.Name = "btnRemoveFilter";
-            this.btnRemoveFilter.Size = new System.Drawing.Size(100, 28);
+            this.btnRemoveFilter.Size = new System.Drawing.Size(78, 24);
             this.btnRemoveFilter.TabIndex = 29;
             this.btnRemoveFilter.Text = "Nollställ";
             this.btnRemoveFilter.UseVisualStyleBackColor = true;
@@ -359,10 +359,10 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(1191, 6);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFilter.Location = new System.Drawing.Point(938, 5);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(100, 28);
+            this.btnFilter.Size = new System.Drawing.Size(78, 24);
             this.btnFilter.TabIndex = 30;
             this.btnFilter.Text = "Filtrera";
             this.btnFilter.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1432, 864);
+            this.ClientSize = new System.Drawing.Size(1124, 713);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnRemoveFilter);
             this.Controls.Add(this.episodeInfo);
