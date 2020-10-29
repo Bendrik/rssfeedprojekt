@@ -76,6 +76,11 @@ namespace DAL.Repositories
         {
             return GetAll().FindIndex(e => e.Name.Equals(name));
         }
+        
+        public int GetIndexOfCategory(string category)
+        {
+            return GetAll().FindIndex(e => e.Category.Equals(category));
+        }
 
         public int GetIndexOfCategory(string category)
         {
