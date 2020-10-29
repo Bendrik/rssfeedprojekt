@@ -73,7 +73,7 @@ namespace testprojekt
                     dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
                 }
             }
-            
+
         }
 
 
@@ -86,7 +86,7 @@ namespace testprojekt
 
             string oldName = getSelectedPodName();
 
-            int podIndex = podController.getPodIndex(oldName);
+            int podIndex = podController.GetPodIndexOfName(oldName);
 
             podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
 
@@ -105,6 +105,8 @@ namespace testprojekt
             //behövs validering
             categoryController.createCategory(txtCategory.Text);
             getCategories();
+            txtCategory.Clear();
+
         }
 
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,11 +252,14 @@ namespace testprojekt
             //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
             //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
             //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
-
+            
             string selectedPod = getSelectedPodName();
 
-            podController.deletePod(selectedPod);
-            getPods();
+            if (podController.deletePod(selectedPod)) {
+                podController.deletePod(podController.GetPodIndexOfName(selectedPod));
+                getPods();
+            }
+            
         }
 
         private string getSelectedPodName()
@@ -264,6 +269,40 @@ namespace testprojekt
             string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
 
             return selectedPod;
+        }
+
+        private void btnRemoveCat_Click(object sender, EventArgs e)
+        {
+            string selectedCat = getSelectedCat();
+            int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+
+            foreach (var checkPodCat in podController.getAllPods())
+            {
+                Console.WriteLine(checkPodCat + selectedCat);
+
+                if (checkPodCat.Category.Equals(selectedCat))
+                {
+
+                    if (podController.deletePod(selectedCat))
+                    {
+                        podController.deletePod(podIndex);
+                        getPods();
+                        categoryController.removeCategory(selectedCat);
+                        getCategories();
+                    }
+                }
+                else
+                {
+
+                }
+
+            }
+        }
+
+        private string getSelectedCat()
+        {
+            string selectedCat = catList.SelectedItem.ToString();
+            return selectedCat;
         }
     }
 }
