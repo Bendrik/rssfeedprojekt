@@ -13,15 +13,16 @@ namespace Models
         public string PodUrl { get; set; }
         public string Frequency { get; set; }
         public string Category { get; set; }
-       
+        public DateTime NextUpdate { get; set; }
         public List<Episode> Episodes { get; set; }
         
-        public Pod (string name, string podUrl, string frequency, string category, List<Episode> episodes) : base (name)
+        public Pod (string name, string podUrl, string frequency, string category, DateTime nextUpdate, List<Episode> episodes) : base (name)
         {
             Name = name;
             PodUrl = podUrl;
             Frequency = frequency;
-            Category = category; 
+            Category = category;
+            NextUpdate = nextUpdate;
             Episodes = episodes;
 
         }

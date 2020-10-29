@@ -18,6 +18,7 @@ namespace testprojekt
     {
         CategoryController categoryController;
         PodController podController;
+        private Timer theTimer = new Timer();
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +29,26 @@ namespace testprojekt
             getPods();
 
             dataGridViewPodcast.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            theTimer.Interval = 1000;
+            theTimer.Tick += theTimer_Tick;
+            theTimer.Start();
+
+            //foreach (var onePod in podController.getAllPods())
+            //{
+            //    onePod.NextUpdate = DateTime.Now;
+            //    //NextUpdate = onePod.NextUpdate;
+            //}
+        }
+
+            private void theTimer_Tick(object sender, EventArgs e)
+        {
+            //foreach (var onePod in podController.getAllPods())
+            //{
+            //    int interval = Int32.Parse(onePod.Frequency);
+            //    podController.FixUpdate(interval);
+            //}
+            podController.FixUpdate();
         }
 
         private void getCategories()
@@ -50,9 +71,9 @@ namespace testprojekt
         {
             comboBoxFreq.Items.Clear();
 
-            comboBoxFreq.Items.Add("Var 5:e minut");
-            comboBoxFreq.Items.Add("Var 10:e minut");
-            comboBoxFreq.Items.Add("Var 20:e minut");
+            comboBoxFreq.Items.Add("10");
+            comboBoxFreq.Items.Add("20");
+            comboBoxFreq.Items.Add("40");
 
             comboBoxFreq.SelectedIndex = 0;
         }

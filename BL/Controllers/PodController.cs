@@ -8,22 +8,56 @@ using DAL.Repositories;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace BL.Controllers
 {
     public class PodController
     {
-        IRepository<Pod> podRepository;
+        IPodRepository<Pod> podRepository;
+        public DateTime NextUpdate { get; set; }
         public PodController()
         {
             podRepository = new PodRepository();
         }
 
+        public void FixUpdate()
+        {
+            foreach (var onePod in getAllPods())
+            {
+                //onePod.NextUpdate = DateTime.Now;
+                NextUpdate = onePod.NextUpdate;
+                //Console.WriteLine(onePod.Name + " " + NextUpdate + " " + podUpdate);
+                int interval = Int32.Parse(onePod.Frequency);
+                if (podUpdate)
+                {
+                    Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
+                    onePod.NextUpdate = DateTime.Now.AddSeconds(interval);
+                    Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
+                }
+            }
+            
+        }
+        public bool podUpdate
+        {
+
+            get
+            {
+                return NextUpdate <= DateTime.Now;
+            }
+        }
+
+        //public string Update(frequency)
+        //{
+        //    NextUpdate = DateTime.Now.AddMinutes(UpdateInterval);
+        //    return Name + "'s Update() was invoked. Next update is at " + NextUpdate;
+        //}
+
         public void CreatePod(string name, string url, string frequency, string category)
         {
-            //List<Episode> = new List<Episode> getEpisodes();
-            List<Episode> episodes = getEpisodes(url);
-            Pod newPod = new Pod(name, url, frequency, category, episodes);
+            List<Episode> episodes = podRepository.getEpisodes(url);
+            DateTime nextUpdate = new DateTime(0001, 0, 0);
+            Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodes);
             podRepository.Create(newPod);
         }
 
@@ -32,28 +66,16 @@ namespace BL.Controllers
             return podRepository.GetAll();
         }
 
-        public List<Episode> getEpisodes(string url)
-        {            
-            XmlReader rssReader = XmlReader.Create(url);
-            SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
-
-            List<Episode> episodeList = new List<Episode>();
-
-            foreach (var item in rssFeed.Items)
-            {
-                Episode newEpisode = new Episode();
-                newEpisode.Name = item.Title.Text;
-                newEpisode.Description = item.Summary.Text;
-                episodeList.Add(newEpisode);
-            }
-
-            return episodeList;
-        }
+        //public List<Episode> getEpisodes(string url)
+        //{            
+        //    return podRepository.getEpisodes(url);
+        //}
 
         public void updatePod(string name, string url, string frequency, string category, int index)
         {
-            List<Episode> episodeList = getEpisodes(url);
-            Pod newPod = new Pod(name, url, frequency, category, episodeList);
+            List<Episode> episodeList = podRepository.getEpisodes(url);
+            DateTime nextUpdate = new DateTime(0001, 0, 0);
+            Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
             podRepository.Update(index, newPod);
         }
 
