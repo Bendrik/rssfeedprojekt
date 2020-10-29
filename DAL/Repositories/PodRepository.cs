@@ -71,9 +71,15 @@ namespace DAL.Repositories
             return episodeList;
         }
 
-        public int GetIndex(string name)
+        public int GetIndexOfName(string name)
+
         {
             return GetAll().FindIndex(e => e.Name.Equals(name));
+        }
+        
+        public int GetIndexOfCategory(string category)
+        {
+            return GetAll().FindIndex(e => e.Category.Equals(category));
         }
 
         public void SaveChanges()

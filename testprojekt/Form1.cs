@@ -18,6 +18,7 @@ namespace testprojekt
     {
         CategoryController categoryController;
         PodController podController;
+        private Timer theTimer = new Timer();
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +29,26 @@ namespace testprojekt
             getPods();
 
             dataGridViewPodcast.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            theTimer.Interval = 1000;
+            theTimer.Tick += theTimer_Tick;
+            theTimer.Start();
+
+            //foreach (var onePod in podController.getAllPods())
+            //{
+            //    onePod.NextUpdate = DateTime.Now;
+            //    //NextUpdate = onePod.NextUpdate;
+            //}
+        }
+
+            private void theTimer_Tick(object sender, EventArgs e)
+        {
+            //foreach (var onePod in podController.getAllPods())
+            //{
+            //    int interval = Int32.Parse(onePod.Frequency);
+            //    podController.FixUpdate(interval);
+            //}
+            podController.FixUpdate();
         }
 
         private void getCategories()
@@ -50,9 +71,9 @@ namespace testprojekt
         {
             comboBoxFreq.Items.Clear();
 
-            comboBoxFreq.Items.Add("Var 5:e minut");
-            comboBoxFreq.Items.Add("Var 10:e minut");
-            comboBoxFreq.Items.Add("Var 20:e minut");
+            comboBoxFreq.Items.Add("10");
+            comboBoxFreq.Items.Add("20");
+            comboBoxFreq.Items.Add("40");
 
             comboBoxFreq.SelectedIndex = 0;
         }
@@ -72,7 +93,7 @@ namespace testprojekt
                     dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
                 }
             }
-            
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -86,7 +107,7 @@ namespace testprojekt
 
             string oldName = getSelectedPodName();
 
-            int podIndex = podController.getPodIndex(oldName);
+            int podIndex = podController.GetPodIndexOfName(oldName);
 
             podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
             getPods();
@@ -104,6 +125,8 @@ namespace testprojekt
             //behövs validering
             categoryController.createCategory(txtCategory.Text);
             getCategories();
+            txtCategory.Clear();
+
         }
 
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,10 +247,18 @@ namespace testprojekt
 
         private void btnRemovePod_Click(object sender, EventArgs e)
         {
+
+            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
+            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
+            
             string selectedPod = getSelectedPodName();
 
-            podController.deletePod(selectedPod);
-            getPods();
+            if (podController.deletePod(selectedPod)) {
+                podController.deletePod(podController.GetPodIndexOfName(selectedPod));
+                getPods();
+            }
+            
         }
 
         private string getSelectedPodName()
@@ -238,6 +269,40 @@ namespace testprojekt
 
             return selectedPod;
         }
+
+
+        private void btnRemoveCat_Click(object sender, EventArgs e)
+        {
+            string selectedCat = getSelectedCat();
+            int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+
+            foreach (var checkPodCat in podController.getAllPods())
+            {
+                Console.WriteLine(checkPodCat + selectedCat);
+
+                if (checkPodCat.Category.Equals(selectedCat))
+                {
+
+                    if (podController.deletePod(selectedCat))
+                    {
+                        podController.deletePod(podIndex);
+                        getPods();
+                        categoryController.removeCategory(selectedCat);
+                        getCategories();
+                    }
+                }
+                else
+                {
+
+                }
+
+            }
+        }
+
+        private string getSelectedCat()
+        {
+            string selectedCat = catList.SelectedItem.ToString();
+            return selectedCat;
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -261,6 +326,7 @@ namespace testprojekt
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             getPods();
+
         }
     }
 }
