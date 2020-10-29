@@ -26,6 +26,15 @@ namespace Models
             Episodes = episodes;
 
         }
+
+        public bool podUpdate
+        {
+
+            get
+            {
+                return NextUpdate <= DateTime.Now;
+            }
+        }
         public Pod()
         { 
         }

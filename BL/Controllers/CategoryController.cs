@@ -28,26 +28,35 @@ namespace BL.Controllers
             Category newCategory = new Category(name);
             categoryRepository.Create(newCategory);
         }
+
         public int getCatIndex(string name)
         {
             int index = categoryRepository.GetIndexOfName(name);
             return index;
         }
 
-        public void removeCategory(string name)
+        public bool removeCategory(string name)
         {
             DialogResult dialogResult = MessageBox.Show("Är du säker på att du vill ta bort " + name + "?", "Bekräfta", MessageBoxButtons.YesNo);
 
-            
+
             if (dialogResult == DialogResult.Yes)
             {
                 int index = categoryRepository.GetIndexOfName(name);
                 categoryRepository.Delete(index);
+                return true;
             }
             else if (dialogResult == DialogResult.No)
             {
-
-            }                                 
+                return false;
+            }
+            return false;
+        }
+        public void updateCategory(string name, string newName)
+        {
+            int index = getCatIndex(name);
+            Category newCategory = new Category(newName);
+            categoryRepository.Update(index, newCategory);
         }
     }
 }

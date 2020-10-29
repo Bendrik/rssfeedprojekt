@@ -32,22 +32,11 @@ namespace testprojekt
 
             theTimer.Interval = 1000;
             theTimer.Tick += theTimer_Tick;
-            theTimer.Start();
-
-            //foreach (var onePod in podController.getAllPods())
-            //{
-            //    onePod.NextUpdate = DateTime.Now;
-            //    //NextUpdate = onePod.NextUpdate;
-            //}
+            theTimer.Start();        
         }
 
-            private void theTimer_Tick(object sender, EventArgs e)
+        private void theTimer_Tick(object sender, EventArgs e)
         {
-            //foreach (var onePod in podController.getAllPods())
-            //{
-            //    int interval = Int32.Parse(onePod.Frequency);
-            //    podController.FixUpdate(interval);
-            //}
             podController.FixUpdate();
         }
 
@@ -115,8 +104,22 @@ namespace testprojekt
 
         private void btnSaveCat_Click(object sender, EventArgs e)
         {
-            //uppdatera kategori i xml
-            //getCategories();
+            string selectedCat = getSelectedCat();
+            string newCatName = txtCategory.Text;
+
+            categoryController.updateCategory(selectedCat, newCatName);
+            {
+                foreach (var onePod in podController.getAllPods())
+                {
+                    if (onePod.Category.Equals(selectedCat))
+                    {
+                        //int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+                        //podController.updatePod(onePod.Name + resten);
+                    }
+                }
+                getCategories();
+                getPods();
+            }
         }
 
         private void btnNewCat_Click(object sender, EventArgs e)
@@ -131,7 +134,7 @@ namespace testprojekt
 
         private void catList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //tror inte denna behövs (action när man trycker på en kategori i listan)
+            txtCategory.Text = getSelectedCat();
         }
 
         private void comboBoxFreq_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,12 +249,7 @@ namespace testprojekt
         }
 
         private void btnRemovePod_Click(object sender, EventArgs e)
-        {
-
-            //int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
-            //DataGridViewRow selectedRow = dataGridViewPodcast.Rows[selectedrowindex];
-            //string selectedPod = Convert.ToString(selectedRow.Cells[0].Value);
-            
+        {           
             string selectedPod = getSelectedPodName();
 
             if (podController.deletePod(selectedPod)) {
@@ -274,28 +272,21 @@ namespace testprojekt
         private void btnRemoveCat_Click(object sender, EventArgs e)
         {
             string selectedCat = getSelectedCat();
-            int podIndex = podController.GetPodIndexOfCategory(selectedCat);
 
-            foreach (var checkPodCat in podController.getAllPods())
-            {
-                Console.WriteLine(checkPodCat + selectedCat);
-
-                if (checkPodCat.Category.Equals(selectedCat))
+            if (categoryController.removeCategory(selectedCat))
+            { 
+                foreach (var checkPodCat in podController.getAllPods())
                 {
+                    Console.WriteLine(checkPodCat + selectedCat);
 
-                    if (podController.deletePod(selectedCat))
+                    if (checkPodCat.Category.Equals(selectedCat))
                     {
-                        podController.deletePod(podIndex);
-                        getPods();
-                        categoryController.removeCategory(selectedCat);
-                        getCategories();
+                        int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+                        podController.deletePod(podIndex);                       
                     }
                 }
-                else
-                {
-
-                }
-
+                getCategories();
+                getPods();
             }
         }
 
@@ -303,6 +294,7 @@ namespace testprojekt
         {
             string selectedCat = catList.SelectedItem.ToString();
             return selectedCat;
+        }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -326,7 +318,6 @@ namespace testprojekt
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             getPods();
-
         }
     }
 }

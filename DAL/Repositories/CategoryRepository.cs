@@ -53,11 +53,6 @@ namespace DAL.Repositories
 
         }
 
-        public int GetIndexOfCategory(string category)
-        {
-            throw new NotImplementedException();
-        }
-
         public int GetIndexOfName(string name)
         {
             return GetAll().FindIndex(e => e.Name.Equals(name));

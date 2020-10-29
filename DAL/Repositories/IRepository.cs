@@ -14,6 +14,5 @@ namespace DAL.Repositories
         List<T> GetAll();
         void SaveChanges();
         int GetIndexOfName(string name);
-        int GetIndexOfCategory(string category);
     }
 }
