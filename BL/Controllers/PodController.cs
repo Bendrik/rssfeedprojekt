@@ -79,26 +79,38 @@ namespace BL.Controllers
             podRepository.Update(index, newPod);
         }
 
-        public int getPodIndex(string name)
+        public int GetPodIndexOfName(string name)
         {
-            int index = podRepository.GetIndex(name);
+            int index = podRepository.GetIndexOfName(name);
+            return index;
+        }
+        public int GetPodIndexOfCategory(string category)
+        {
+            int index = podRepository.GetIndexOfCategory(category);
             return index;
         }
 
-        public void deletePod(string name)
+        public bool deletePod(string name)
         {
+
             DialogResult dialogResult = MessageBox.Show("Vill du ta bort podcasten " + name + "?", "Bekräfta", MessageBoxButtons.YesNo);
 
             if (dialogResult == DialogResult.Yes)
             {
-                int index = podRepository.GetIndex(name);
-                podRepository.Delete(index);
+                //int index = podRepository.GetIndex(name);
+                //podRepository.Delete(index);
+                return true;
             }
-            else if (dialogResult == DialogResult.No)
+            else //if (dialogResult == DialogResult.No)
             {
-
+                return false;
             }
             
+        }
+
+        public void deletePod(int index)
+        {
+            podRepository.Delete(index);
         }
     }
 }
