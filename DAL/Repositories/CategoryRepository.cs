@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Exceptions;
 using Models;
 
 namespace DAL.Repositories
@@ -34,10 +35,20 @@ namespace DAL.Repositories
         {
 
             List<Category> categoryListReturn = new List<Category>();
-            if (categoryListReturn != null)
+
+            try
             {
-                categoryListReturn = dataManager.Deserialize();
+                if (categoryListReturn != null)
+                {
+                    categoryListReturn = dataManager.Deserialize();
+                }
             }
+            catch (SerializerException)
+            {
+                Console.WriteLine("kunde inte deserialize:a category.xml");
+            }
+
+
             return categoryListReturn;
 
         }
@@ -54,14 +65,13 @@ namespace DAL.Repositories
 
         public void SaveChanges()
         {
-
             try
             {
                 dataManager.Serialize(categoryList);
             }
-            catch (Exception)
+            catch (SerializerException)
             {
-                throw;
+                Console.WriteLine("kunde inte serialize:a category.xml");
             }
         }
 
