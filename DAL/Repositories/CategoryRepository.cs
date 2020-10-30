@@ -72,7 +72,11 @@ namespace DAL.Repositories
 
         public void Update(int index, Category newEntity)
         {
-            throw new NotImplementedException();
+            if (index >= 0)
+            {
+                categoryList[index] = newEntity;
+            }
+            SaveChanges();
         }
     }
 }
