@@ -113,8 +113,8 @@ namespace testprojekt
                 {
                     if (onePod.Category.Equals(selectedCat))
                     {
-                        //int podIndex = podController.GetPodIndexOfCategory(selectedCat);
-                        //podController.updatePod(onePod.Name + resten);
+                        int podIndex = podController.GetPodIndexOfName(onePod.Name);
+                        podController.updatePod(onePod.Name, onePod.PodUrl, onePod.Frequency, newCatName, podIndex);
                     }
                 }
                 getCategories();

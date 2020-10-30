@@ -62,6 +62,14 @@ namespace BL.Controllers
             Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
             podRepository.Update(index, newPod);
         }
+        //public void updatePod(string name, string url, string frequency, string category)
+        //{
+        //    List<Episode> episodeList = podRepository.getEpisodes(url);
+        //    DateTime nextUpdate = DateTime.Now;
+        //    Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
+        //    int index = GetPodIndexOfName(name);
+        //    podRepository.Update(index, newPod);
+        //}
 
         public int GetPodIndexOfName(string name)
         {
