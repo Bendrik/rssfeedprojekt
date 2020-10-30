@@ -11,6 +11,7 @@ using Models;
 using BL.Controllers;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.Collections;
 
 namespace testprojekt
 {
@@ -37,7 +38,33 @@ namespace testprojekt
 
         private void theTimer_Tick(object sender, EventArgs e)
         {
-            podController.FixUpdate();
+            if(podController.FixUpdate())
+            {
+                foreach (var onePod in podController.getAllPods())
+                {
+                    if (onePod != null)
+                    {
+                        for (int i = 0; i < dataGridViewPodcast.Rows.Count; i++)
+                        {
+                            if (onePod.Name.Equals(dataGridViewPodcast.Rows[i].Cells[0].Value))
+                            {
+                                var episodeAmount = onePod.Episodes.Count().ToString();
+                                if (episodeAmount.Equals(dataGridViewPodcast.Rows[i].Cells[3].Value))
+                                {
+
+                                }
+                                else
+                                {
+                                    dataGridViewPodcast.Rows[i].Cells[4].Value = "Ja";
+                                    dataGridViewPodcast.Rows[i].Cells[3].Value = episodeAmount;
+                                }
+                            }
+                        }
+                        
+
+                    }
+                }
+            }
         }
 
         private void getCategories()
@@ -79,7 +106,7 @@ namespace testprojekt
                 if (item != null)
                 {
                     var episodeAmount = item.Episodes.Count().ToString();
-                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount, "Nej");
                 }
             }
 
@@ -161,13 +188,21 @@ namespace testprojekt
 
         private void dataGridViewPodcast_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            setNewEpisodeToNo();
             fillPodcastBoxes();
             getEpisodes();
         }
         private void dataGridViewPodcast_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            setNewEpisodeToNo();
             fillPodcastBoxes();
             getEpisodes();
+        }
+
+        private void setNewEpisodeToNo()
+        {
+            int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            dataGridViewPodcast.Rows[selectedrowindex].Cells[4].Value = "Nej";
         }
 
         private void fillPodcastBoxes()
@@ -304,7 +339,6 @@ namespace testprojekt
             episodeInfo.Text = "";
 
             string category = catList.SelectedItem.ToString();
-
             foreach (var item in podController.getAllPods())
             {
                 if (item.Category.Equals(category))
@@ -314,7 +348,6 @@ namespace testprojekt
                 }
             }
         }
-
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             getPods();

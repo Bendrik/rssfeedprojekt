@@ -22,8 +22,10 @@ namespace BL.Controllers
             podRepository = new PodRepository();
         }
 
-        public void FixUpdate()
+        public bool FixUpdate()
         {
+            bool updated = false;
+
             foreach (var onePod in getAllPods())
             {
                 NextUpdate = onePod.NextUpdate;
@@ -37,10 +39,11 @@ namespace BL.Controllers
                     List<Episode> episodes = podRepository.getEpisodes(onePod.PodUrl);
                     Pod newPod = new Pod(onePod.Name, onePod.PodUrl, onePod.Frequency, onePod.Category, onePod.NextUpdate, episodes);
                     podRepository.Update(index, newPod);
+                    updated = true;
                     //Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
                 }
             }
-            
+            return updated;            
         }
 
         public void CreatePod(string name, string url, string frequency, string category)
@@ -62,14 +65,6 @@ namespace BL.Controllers
             Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
             podRepository.Update(index, newPod);
         }
-        //public void updatePod(string name, string url, string frequency, string category)
-        //{
-        //    List<Episode> episodeList = podRepository.getEpisodes(url);
-        //    DateTime nextUpdate = DateTime.Now;
-        //    Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
-        //    int index = GetPodIndexOfName(name);
-        //    podRepository.Update(index, newPod);
-        //}
 
         public int GetPodIndexOfName(string name)
         {
