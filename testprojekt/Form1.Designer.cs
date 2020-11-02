@@ -85,7 +85,7 @@
             // 
             this.comboBoxFreq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFreq.FormattingEnabled = true;
-            this.comboBoxFreq.Location = new System.Drawing.Point(333, 313);
+            this.comboBoxFreq.Location = new System.Drawing.Point(304, 314);
             this.comboBoxFreq.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxFreq.Name = "comboBoxFreq";
             this.comboBoxFreq.Size = new System.Drawing.Size(191, 24);
@@ -96,7 +96,7 @@
             // 
             this.comboBoxCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCat.FormattingEnabled = true;
-            this.comboBoxCat.Location = new System.Drawing.Point(333, 359);
+            this.comboBoxCat.Location = new System.Drawing.Point(304, 360);
             this.comboBoxCat.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.comboBoxCat.Name = "comboBoxCat";
             this.comboBoxCat.Size = new System.Drawing.Size(191, 24);
@@ -270,16 +270,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(329, 294);
+            this.label4.Location = new System.Drawing.Point(300, 295);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(146, 17);
+            this.label4.Size = new System.Drawing.Size(215, 17);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Uppdateringsintervall:";
+            this.label4.Text = "Uppdateringsintervall(sekunder):";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(328, 337);
+            this.label5.Location = new System.Drawing.Point(299, 338);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 17);
