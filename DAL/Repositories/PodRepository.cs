@@ -53,10 +53,10 @@ namespace DAL.Repositories
             return podListReturn;
         }
 
-        public List<Episode> getEpisodes(string url)
+        public async Task <List<Episode>> getEpisodes(string url)
         {
             XmlReader rssReader = XmlReader.Create(url);
-            SyndicationFeed rssFeed = SyndicationFeed.Load(rssReader);
+            SyndicationFeed rssFeed = await Task.Run(() => SyndicationFeed.Load(rssReader));
 
             List<Episode> episodeList = new List<Episode>();
 

@@ -36,9 +36,10 @@ namespace testprojekt
             theTimer.Start();        
         }
 
-        private void theTimer_Tick(object sender, EventArgs e)
+        private async void theTimer_Tick(object sender, EventArgs e)
         {
-            if(podController.FixUpdate())
+            bool updated = await podController.FixUpdate();
+            if (updated)
             {
                 foreach (var onePod in podController.getAllPods())
                 {
@@ -114,17 +115,24 @@ namespace testprojekt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string newName = txtPodName.Text;
-            string newUrl = textBoxUrl.Text;
-            string newFrequency = comboBoxFreq.SelectedItem.ToString();
-            string newCategory = comboBoxCat.SelectedItem.ToString();
+            if (comboBoxCat.SelectedIndex == -1)
+            {
+                MessageBox.Show("Du måste skapa en kategori först");
+            }
+            else
+            { 
+                string newName = txtPodName.Text;
+                string newUrl = textBoxUrl.Text;
+                string newFrequency = comboBoxFreq.SelectedItem.ToString();
+                string newCategory = comboBoxCat.SelectedItem.ToString();
 
-            string oldName = getSelectedPodName();
+                string oldName = getSelectedPodName();
 
-            int podIndex = podController.GetPodIndexOfName(oldName);
+                int podIndex = podController.GetPodIndexOfName(oldName);
 
-            podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
-            getPods();
+                podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
+                getPods();
+            }
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
@@ -174,7 +182,22 @@ namespace testprojekt
 
         private void btnNy_Click(object sender, EventArgs e)
         {
-            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+
+            if (comboBoxCat.SelectedIndex == -1)
+            {
+                MessageBox.Show("Du måste skapa en kategori först");
+            }
+            else
+            {
+                podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+                getPods();
+                useDelay();
+            }
+        }
+
+        async Task useDelay()
+        {
+            await Task.Delay(200);
             getPods();
         }
 
@@ -223,7 +246,6 @@ namespace testprojekt
                     selectedUrl = onePod.PodUrl;
                 }
             }
-
 
             txtPodName.Text = selectedPod;
             textBoxUrl.Text = selectedUrl;

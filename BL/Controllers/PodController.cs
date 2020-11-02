@@ -25,7 +25,7 @@ namespace BL.Controllers
             validering = new Validering();
         }
 
-        public bool FixUpdate()
+        public async Task<bool> FixUpdate()
         {
             bool updated = false;
 
@@ -39,7 +39,7 @@ namespace BL.Controllers
                     //Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
                     onePod.NextUpdate = DateTime.Now.AddSeconds(interval);
                     int index = GetPodIndexOfName(onePod.Name);
-                    List<Episode> episodes = podRepository.getEpisodes(onePod.PodUrl);
+                    List<Episode> episodes = await podRepository.getEpisodes(onePod.PodUrl);
                     Pod newPod = new Pod(onePod.Name, onePod.PodUrl, onePod.Frequency, onePod.Category, onePod.NextUpdate, episodes);
                     podRepository.Update(index, newPod);
                     updated = true;
@@ -49,13 +49,13 @@ namespace BL.Controllers
             return updated;            
         }
 
-        public void CreatePod(string name, string url, string frequency, string category)
+        public async void CreatePod(string name, string url, string frequency, string category)
         {
             if (validering.textEmpty(name))
             {
                 if (validering.validateURL(url))
                 {
-                    List<Episode> episodes = podRepository.getEpisodes(url);
+                    List<Episode> episodes = await podRepository.getEpisodes(url);
                     DateTime nextUpdate = DateTime.Now;
                     Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodes);
                     podRepository.Create(newPod);
@@ -75,11 +75,11 @@ namespace BL.Controllers
         {
             return podRepository.GetAll();
         }
-        public void updatePod(string name, string url, string frequency, string category, int index)
+        public async void updatePod(string name, string url, string frequency, string category, int index)
         {
             if (validering.validateURL(url))
             {
-                List<Episode> episodeList = podRepository.getEpisodes(url);
+                List<Episode> episodeList = await podRepository.getEpisodes(url);
                 DateTime nextUpdate = DateTime.Now;
                 Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
                 podRepository.Update(index, newPod);
