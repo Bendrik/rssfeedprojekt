@@ -8,38 +8,38 @@ using System.Xml;
 
 namespace DAL
 {
-    class Validering
+    public class Validering
     {
-        bool funkar = true;
+        bool works = false;
 
         public bool validateURL(string url)
         {
-            funkar = true;
             try
             {
                 XmlReader reader = XmlReader.Create(url);
                 Rss20FeedFormatter formatter = new Rss20FeedFormatter();
                 formatter.ReadFrom(reader);
                 reader.Close();
+                works = true;
             }
             catch
             {
-                funkar = false;
+                works = false;
             }
-            return funkar;
+            return works;
         }
 
-        public bool textTomt(string text)
+        public bool textEmpty(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
-                funkar = false;
+                works = false;
             }
             else
             {
-                funkar = true;
+                works = true;
             }
-            return funkar;
+            return works;
         }
 
 

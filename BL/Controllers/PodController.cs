@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using DAL.Repositories;
+using DAL;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Windows.Forms;
@@ -15,15 +16,19 @@ namespace BL.Controllers
     public class PodController
     {
         IPodRepository<Pod> podRepository;
+        Validering validering;
 
         public DateTime NextUpdate { get; set; }
         public PodController()
         {
             podRepository = new PodRepository();
+            validering = new Validering();
         }
 
-        public void FixUpdate()
+        public async Task<bool> FixUpdate()
         {
+            bool updated = false;
+
             foreach (var onePod in getAllPods())
             {
                 NextUpdate = onePod.NextUpdate;
@@ -34,42 +39,56 @@ namespace BL.Controllers
                     //Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
                     onePod.NextUpdate = DateTime.Now.AddSeconds(interval);
                     int index = GetPodIndexOfName(onePod.Name);
-                    List<Episode> episodes = podRepository.getEpisodes(onePod.PodUrl);
+                    List<Episode> episodes = await podRepository.getEpisodes(onePod.PodUrl);
                     Pod newPod = new Pod(onePod.Name, onePod.PodUrl, onePod.Frequency, onePod.Category, onePod.NextUpdate, episodes);
                     podRepository.Update(index, newPod);
+                    updated = true;
                     //Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
                 }
             }
-            
+            return updated;            
         }
 
-        public void CreatePod(string name, string url, string frequency, string category)
+        public async void CreatePod(string name, string url, string frequency, string category)
         {
-            List<Episode> episodes = podRepository.getEpisodes(url);
-            DateTime nextUpdate = DateTime.Now;
-            Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodes);
-            podRepository.Create(newPod);
+            if (validering.textEmpty(name))
+            {
+                if (validering.validateURL(url))
+                {
+                    List<Episode> episodes = await podRepository.getEpisodes(url);
+                    DateTime nextUpdate = DateTime.Now;
+                    Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodes);
+                    podRepository.Create(newPod);
+                }
+                else
+                {
+                    MessageBox.Show("URLen är ogiltig");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste fylla i ett namn");
+            }
         }
 
         public List<Pod> getAllPods()
         {
             return podRepository.GetAll();
         }
-        public void updatePod(string name, string url, string frequency, string category, int index)
+        public async void updatePod(string name, string url, string frequency, string category, int index)
         {
-            List<Episode> episodeList = podRepository.getEpisodes(url);
-            DateTime nextUpdate = DateTime.Now;
-            Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
-            podRepository.Update(index, newPod);
+            if (validering.validateURL(url))
+            {
+                List<Episode> episodeList = await podRepository.getEpisodes(url);
+                DateTime nextUpdate = DateTime.Now;
+                Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
+                podRepository.Update(index, newPod);
+            }
+            else
+            {
+                MessageBox.Show("URLen är ogiltig");
+            }
         }
-        //public void updatePod(string name, string url, string frequency, string category)
-        //{
-        //    List<Episode> episodeList = podRepository.getEpisodes(url);
-        //    DateTime nextUpdate = DateTime.Now;
-        //    Pod newPod = new Pod(name, url, frequency, category, nextUpdate, episodeList);
-        //    int index = GetPodIndexOfName(name);
-        //    podRepository.Update(index, newPod);
-        //}
 
         public int GetPodIndexOfName(string name)
         {
@@ -89,8 +108,6 @@ namespace BL.Controllers
 
             if (dialogResult == DialogResult.Yes)
             {
-                //int index = podRepository.GetIndexOfName(name);
-                //podRepository.Delete(index);
                 return true;
             }
             else

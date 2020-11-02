@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using DAL.Repositories;
+using DAL;
 using System.Collections.Specialized;
 using System.Windows.Forms;
 
@@ -13,9 +14,11 @@ namespace BL.Controllers
     public class CategoryController
     {
         IRepository<Category> categoryRepository;
+        Validering validering;
         public CategoryController()
         {
             categoryRepository = new CategoryRepository();
+            validering = new Validering();
         }
 
         public List<Category> getAllCategories()
@@ -25,8 +28,15 @@ namespace BL.Controllers
 
         public void createCategory(string name)
         {
-            Category newCategory = new Category(name);
-            categoryRepository.Create(newCategory);
+            if (validering.textEmpty(name))
+            {
+                Category newCategory = new Category(name);
+                categoryRepository.Create(newCategory);
+            }
+            else
+            {
+                MessageBox.Show("Kategorin måste ha ett namn");
+            }
         }
 
         public int getCatIndex(string name)
@@ -52,11 +62,22 @@ namespace BL.Controllers
             }
             return false;
         }
-        public void updateCategory(string name, string newName)
+        public bool updateCategory(string name, string newName)
         {
-            int index = getCatIndex(name);
-            Category newCategory = new Category(newName);
-            categoryRepository.Update(index, newCategory);
+            bool updated = false;
+            if (validering.textEmpty(newName))
+            {
+                int index = getCatIndex(name);
+                Category newCategory = new Category(newName);
+                categoryRepository.Update(index, newCategory);
+                updated = true;
+            }
+            else
+            {
+                MessageBox.Show("Kategorin måste ha ett namn");
+                updated = false;
+            }
+            return updated;
         }
     }
 }

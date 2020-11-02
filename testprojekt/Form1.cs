@@ -11,6 +11,7 @@ using Models;
 using BL.Controllers;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.Collections;
 
 namespace testprojekt
 {
@@ -35,9 +36,36 @@ namespace testprojekt
             theTimer.Start();        
         }
 
-        private void theTimer_Tick(object sender, EventArgs e)
+        private async void theTimer_Tick(object sender, EventArgs e)
         {
-            podController.FixUpdate();
+            bool updated = await podController.FixUpdate();
+            if (updated)
+            {
+                foreach (var onePod in podController.getAllPods())
+                {
+                    if (onePod != null)
+                    {
+                        for (int i = 0; i < dataGridViewPodcast.Rows.Count; i++)
+                        {
+                            if (onePod.Name.Equals(dataGridViewPodcast.Rows[i].Cells[0].Value))
+                            {
+                                var episodeAmount = onePod.Episodes.Count().ToString();
+                                if (episodeAmount.Equals(dataGridViewPodcast.Rows[i].Cells[3].Value))
+                                {
+
+                                }
+                                else
+                                {
+                                    dataGridViewPodcast.Rows[i].Cells[4].Value = "Ja";
+                                    dataGridViewPodcast.Rows[i].Cells[3].Value = episodeAmount;
+                                }
+                            }
+                        }
+                        
+
+                    }
+                }
+            }
         }
 
         private void getCategories()
@@ -79,7 +107,7 @@ namespace testprojekt
                 if (item != null)
                 {
                     var episodeAmount = item.Episodes.Count().ToString();
-                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount, "Nej");
                 }
             }
 
@@ -87,45 +115,55 @@ namespace testprojekt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //uppdatera podinfo
-            //behövs validering
-            string newName = txtPodName.Text;
-            string newUrl = textBoxUrl.Text;
-            string newFrequency = comboBoxFreq.SelectedItem.ToString();
-            string newCategory = comboBoxCat.SelectedItem.ToString();
+            if (comboBoxCat.SelectedIndex == -1)
+            {
+                MessageBox.Show("Du måste skapa en kategori först");
+            }
+            else
+            { 
+                string newName = txtPodName.Text;
+                string newUrl = textBoxUrl.Text;
+                string newFrequency = comboBoxFreq.SelectedItem.ToString();
+                string newCategory = comboBoxCat.SelectedItem.ToString();
 
-            string oldName = getSelectedPodName();
+                string oldName = getSelectedPodName();
 
-            int podIndex = podController.GetPodIndexOfName(oldName);
+                int podIndex = podController.GetPodIndexOfName(oldName);
 
-            podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
-            getPods();
+                podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
+                getPods();
+            }
         }
 
         private void btnSaveCat_Click(object sender, EventArgs e)
         {
-            string selectedCat = getSelectedCat();
-            string newCatName = txtCategory.Text;
-
-            categoryController.updateCategory(selectedCat, newCatName);
+            if (catList.SelectedIndex != -1)
             {
-                foreach (var onePod in podController.getAllPods())
+                string selectedCat = getSelectedCat();
+                string newCatName = txtCategory.Text;
+
+                if (categoryController.updateCategory(selectedCat, newCatName))
                 {
-                    if (onePod.Category.Equals(selectedCat))
+                    foreach (var onePod in podController.getAllPods())
                     {
-                        int podIndex = podController.GetPodIndexOfName(onePod.Name);
-                        podController.updatePod(onePod.Name, onePod.PodUrl, onePod.Frequency, newCatName, podIndex);
+                        if (onePod.Category.Equals(selectedCat))
+                        {
+                            int podIndex = podController.GetPodIndexOfName(onePod.Name);
+                            podController.updatePod(onePod.Name, onePod.PodUrl, onePod.Frequency, newCatName, podIndex);
+                        }
                     }
+                    getCategories();
+                    getPods();
                 }
-                getCategories();
-                getPods();
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori i listan");
             }
         }
 
         private void btnNewCat_Click(object sender, EventArgs e)
         {
-            //lägg ny kategori i xml
-            //behövs validering
             categoryController.createCategory(txtCategory.Text);
             getCategories();
             txtCategory.Clear();
@@ -144,8 +182,22 @@ namespace testprojekt
 
         private void btnNy_Click(object sender, EventArgs e)
         {
-            //behövs validering
-            podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+
+            if (comboBoxCat.SelectedIndex == -1)
+            {
+                MessageBox.Show("Du måste skapa en kategori först");
+            }
+            else
+            {
+                podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
+                getPods();
+                useDelay();
+            }
+        }
+
+        async Task useDelay()
+        {
+            await Task.Delay(200);
             getPods();
         }
 
@@ -161,13 +213,24 @@ namespace testprojekt
 
         private void dataGridViewPodcast_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            setNewEpisodeToNo();
             fillPodcastBoxes();
             getEpisodes();
         }
         private void dataGridViewPodcast_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            setNewEpisodeToNo();
             fillPodcastBoxes();
             getEpisodes();
+        }
+
+        private void setNewEpisodeToNo()
+        {
+            int selectedrowindex = dataGridViewPodcast.SelectedCells[0].RowIndex;
+            if (dataGridViewPodcast.Rows[selectedrowindex].Cells[0].Value != null)
+            {
+                dataGridViewPodcast.Rows[selectedrowindex].Cells[4].Value = "Nej";
+            }
         }
 
         private void fillPodcastBoxes()
@@ -183,7 +246,6 @@ namespace testprojekt
                     selectedUrl = onePod.PodUrl;
                 }
             }
-
 
             txtPodName.Text = selectedPod;
             textBoxUrl.Text = selectedUrl;
@@ -271,28 +333,41 @@ namespace testprojekt
 
         private void btnRemoveCat_Click(object sender, EventArgs e)
         {
-            string selectedCat = getSelectedCat();
+            if (catList.SelectedIndex != -1)
+            {
+                string selectedCat = getSelectedCat();
 
-            if (categoryController.removeCategory(selectedCat))
-            { 
-                foreach (var checkPodCat in podController.getAllPods())
+                if (categoryController.removeCategory(selectedCat))
                 {
-                    Console.WriteLine(checkPodCat + selectedCat);
-
-                    if (checkPodCat.Category.Equals(selectedCat))
+                    foreach (var checkPodCat in podController.getAllPods())
                     {
-                        int podIndex = podController.GetPodIndexOfCategory(selectedCat);
-                        podController.deletePod(podIndex);                       
+                        Console.WriteLine(checkPodCat + selectedCat);
+
+                        if (checkPodCat.Category.Equals(selectedCat))
+                        {
+                            int podIndex = podController.GetPodIndexOfCategory(selectedCat);
+                            podController.deletePod(podIndex);
+                        }
                     }
+                    getCategories();
+                    getPods();
                 }
-                getCategories();
-                getPods();
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori i listan");
             }
         }
 
         private string getSelectedCat()
         {
-            string selectedCat = catList.SelectedItem.ToString();
+            string selectedCat = "";
+
+            if (catList.SelectedIndex != -1)
+            {
+                selectedCat = catList.SelectedItem.ToString();
+            }
+
             return selectedCat;
         }
 
@@ -304,17 +379,15 @@ namespace testprojekt
             episodeInfo.Text = "";
 
             string category = catList.SelectedItem.ToString();
-
             foreach (var item in podController.getAllPods())
             {
                 if (item.Category.Equals(category))
                 {
                     var episodeAmount = item.Episodes.Count().ToString();
-                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount);
+                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount, "Nej");
                 }
             }
         }
-
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             getPods();

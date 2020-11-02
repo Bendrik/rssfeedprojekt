@@ -9,7 +9,7 @@ namespace DAL.Repositories
 {
     public interface IPodRepository<T>:IRepository<T> where T:Pod
     {
-        List<Episode> getEpisodes(string url);
+        Task <List<Episode>> getEpisodes(string url);
         int GetIndexOfCategory(string name);
     }
 }
