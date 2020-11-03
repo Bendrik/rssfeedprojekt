@@ -132,6 +132,7 @@ namespace testprojekt
 
                 podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
                 getPods();
+                _ = useDelay();
             }
         }
 
@@ -191,7 +192,7 @@ namespace testprojekt
             {
                 podController.CreatePod(txtPodName.Text, textBoxUrl.Text, comboBoxFreq.SelectedItem.ToString(), comboBoxCat.SelectedItem.ToString());
                 getPods();
-                useDelay();
+                _ = useDelay();
             }
         }
 

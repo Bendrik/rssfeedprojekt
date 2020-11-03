@@ -15,5 +15,10 @@ namespace Models
         {
             string description = Description;
         }
+
+        public override string mediaType()
+        {
+            return "Episode";
+        }
     }
 }
