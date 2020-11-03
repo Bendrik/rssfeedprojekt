@@ -117,18 +117,25 @@ namespace testprojekt
         {
             try
             {
-                string newName = txtPodName.Text;
-                string newUrl = textBoxUrl.Text;
-                string newFrequency = comboBoxFreq.SelectedItem.ToString();
-                string newCategory = comboBoxCat.SelectedItem.ToString();
+                if (comboBoxCat.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Du måste skapa en kategori först");
+                }
+                else
+                {
+                    string newName = txtPodName.Text;
+                    string newUrl = textBoxUrl.Text;
+                    string newFrequency = comboBoxFreq.SelectedItem.ToString();
+                    string newCategory = comboBoxCat.SelectedItem.ToString();
 
-                string oldName = getSelectedPodName();
+                    string oldName = getSelectedPodName();
 
-                int podIndex = podController.GetPodIndexOfName(oldName);
+                    int podIndex = podController.GetPodIndexOfName(oldName);
 
-                podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
-                getPods();
-                _ = useDelay();
+                    podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
+                    getPods();
+                    _ = useDelay();
+                }
             }
             catch (Exception)
             {
