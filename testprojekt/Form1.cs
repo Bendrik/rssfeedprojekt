@@ -115,12 +115,8 @@ namespace testprojekt
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (comboBoxCat.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Du måste skapa en kategori först");
-            }
-            else
-            { 
                 string newName = txtPodName.Text;
                 string newUrl = textBoxUrl.Text;
                 string newFrequency = comboBoxFreq.SelectedItem.ToString();
@@ -133,6 +129,10 @@ namespace testprojekt
                 podController.updatePod(newName, newUrl, newFrequency, newCategory, podIndex);
                 getPods();
                 _ = useDelay();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Du måste välja en podcast i listan");
             }
         }
 
@@ -312,12 +312,21 @@ namespace testprojekt
         }
 
         private void btnRemovePod_Click(object sender, EventArgs e)
-        {           
-            string selectedPod = getSelectedPodName();
+        {
 
-            if (podController.deletePod(selectedPod)) {
-                podController.deletePod(podController.GetPodIndexOfName(selectedPod));
-                getPods();
+            try
+            {
+                string selectedPod = getSelectedPodName();
+
+                if (podController.deletePod(selectedPod))
+                {
+                    podController.deletePod(podController.GetPodIndexOfName(selectedPod));
+                    getPods();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Du måste välja en podcast i listan");
             }
             
         }
@@ -374,19 +383,26 @@ namespace testprojekt
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            dataGridViewPodcast.Rows.Clear();
-            dataGridViewEpisodes.Rows.Clear();
-            lblEpisodeName.Text = "";
-            episodeInfo.Text = "";
-
-            string category = catList.SelectedItem.ToString();
-            foreach (var item in podController.getAllPods())
+            if (catList.SelectedIndex != -1)
             {
-                if (item.Category.Equals(category))
+                dataGridViewPodcast.Rows.Clear();
+                dataGridViewEpisodes.Rows.Clear();
+                lblEpisodeName.Text = "";
+                episodeInfo.Text = "";
+
+                string category = catList.SelectedItem.ToString();
+                foreach (var item in podController.getAllPods())
                 {
-                    var episodeAmount = item.Episodes.Count().ToString();
-                    dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount, "Nej");
+                    if (item.Category.Equals(category))
+                    {
+                        var episodeAmount = item.Episodes.Count().ToString();
+                        dataGridViewPodcast.Rows.Add(item.Name, item.Category, item.Frequency, episodeAmount, "Nej");
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori i listan");
             }
         }
         private void btnRemoveFilter_Click(object sender, EventArgs e)
