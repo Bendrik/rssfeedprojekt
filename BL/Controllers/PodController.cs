@@ -36,14 +36,12 @@ namespace BL.Controllers
 
                 if (onePod.podUpdate)
                 {
-                    //Console.WriteLine(onePod.Name + " nästa innan add: " + onePod.NextUpdate);
                     onePod.NextUpdate = DateTime.Now.AddSeconds(interval);
                     int index = GetPodIndexOfName(onePod.Name);
                     List<Episode> episodes = await podRepository.getEpisodes(onePod.PodUrl);
                     Pod newPod = new Pod(onePod.Name, onePod.PodUrl, onePod.Frequency, onePod.Category, onePod.NextUpdate, episodes);
                     podRepository.Update(index, newPod);
                     updated = true;
-                    //Console.WriteLine(onePod.Name + " nästa efter add: " + onePod.NextUpdate);
                 }
             }
             return updated;            

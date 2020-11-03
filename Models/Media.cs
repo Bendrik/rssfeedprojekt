@@ -8,7 +8,7 @@ namespace Models
 {
     public abstract class Media
     {
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
         public Media(string name)
         {
@@ -18,6 +18,11 @@ namespace Models
         public Media()
         {
 
+        }
+
+        public virtual string mediaType()
+        {
+            return "Media";
         }
       
     }

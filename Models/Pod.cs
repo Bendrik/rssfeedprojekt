@@ -39,5 +39,10 @@ namespace Models
         { 
         }
 
+        public override string mediaType()
+        {
+            return "Podcast";
+        }
+
     }
 }
