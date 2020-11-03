@@ -9,7 +9,6 @@ namespace Models
 {
     public class Pod : Media
     {
-        //public string Name { get; set; }
         public string PodUrl { get; set; }
         public string Frequency { get; set; }
         public string Category { get; set; }
