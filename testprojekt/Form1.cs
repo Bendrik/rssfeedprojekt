@@ -162,6 +162,7 @@ namespace testprojekt
                     }
                     getCategories();
                     getPods();
+                    _ = useDelay();
                 }
             }
             else
